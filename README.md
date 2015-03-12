@@ -16,8 +16,6 @@ If you want to uninstall, remove Tuna.xcplugin in the `Plug-ins` directory.
 
 * Xcode 6.0+ 
 
-## より便利に使うために
-
 ### XVim
 ~/.xvimrc
 ```
