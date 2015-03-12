@@ -132,9 +132,10 @@ static Tuna *sharedPlugin;
 
 - (DVTTextDocumentLocation *)documentLocationWithLineNumber:(long long)lineNumber
 {
-    NSArray *documentURLs = [self currentWorkspaceDocument].recentEditorDocumentURLs;
+    IDEEditorContext *editorContext = [self currentEditorContext];
+    IDEEditorHistoryStack *stack = [editorContext currentHistoryStack];
     NSNumber *timestamp = @([[NSDate date] timeIntervalSince1970]);
-    return [[DVTTextDocumentLocation alloc] initWithDocumentURL:[documentURLs firstObject]
+    return [[DVTTextDocumentLocation alloc] initWithDocumentURL:stack.currentEditorHistoryItem.documentURL
                                                       timestamp:timestamp
                                                       lineRange:NSMakeRange(MAX(lineNumber, 0), lineNumber)];
 }
@@ -164,12 +165,22 @@ static Tuna *sharedPlugin;
     }
 }
 
-- (IDEEditor *)currentEditor
+- (IDEEditorContext *)currentEditorContext
 {
     NSWindowController *currentWindowController = [[NSApp keyWindow] windowController];
     if ([currentWindowController isKindOfClass:NSClassFromString(@"IDEWorkspaceWindowController")]) {
         IDEEditorArea *editorArea = [(IDEWorkspaceWindowController *)currentWindowController editorArea];
-        IDEEditorContext *editorContext = [editorArea lastActiveEditorContext];
+        return [editorArea lastActiveEditorContext];
+    }
+    else {
+        return nil;
+    }
+}
+
+- (IDEEditor *)currentEditor
+{
+    IDEEditorContext *editorContext = [self currentEditorContext];
+    if (editorContext) {
         return [editorContext editor];
     }
     else {

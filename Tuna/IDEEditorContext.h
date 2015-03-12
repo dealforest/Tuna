@@ -14,4 +14,6 @@
 
 @property(retain, nonatomic) IDEEditor *editor;
 
+- (id)currentHistoryStack;
+
 @end

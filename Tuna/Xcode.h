@@ -26,3 +26,5 @@
 #import "IDESourceCodeEditor.h"
 #import "IDESourceCodeComparisonEditor.h"
 #import "IDELogBreakpointAction.h"
+#import "IDEEditorHistoryStack.h"
+#import "IDEEditorHistoryItem.h"
