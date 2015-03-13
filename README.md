@@ -36,4 +36,4 @@ noremap \<enter> :xcmenucmd Set Backtrace Breakpoint<CR>
 
 ### License
 
-Crying is released under the MIT license. See LICENSE for details.
+Tuna is released under the MIT license. See LICENSE for details.
