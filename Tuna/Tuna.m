@@ -17,6 +17,10 @@ static Tuna *sharedPlugin;
 @interface Tuna()
 
 @property (nonatomic, strong, readwrite) NSBundle *bundle;
+
+/// Install Tuna menu item in Xcode.
+- (void)installMenuItem:(NSMenuItem*)menu;
+
 @end
 
 @implementation Tuna
@@ -71,11 +75,18 @@ static Tuna *sharedPlugin;
     })];
     
     pluginMenuItem.submenu = pluginMenu;
-    
-    NSMenuItem *editMenuItem = [[NSApp mainMenu] itemWithTitle:@"Edit"];
-    
-    [[editMenuItem submenu] addItem:[NSMenuItem separatorItem]];
-    [[editMenuItem submenu] addItem:pluginMenuItem];
+	
+    [self installMenuItem:pluginMenuItem];
+}
+
+- (void)installMenuItem:(NSMenuItem *)menuItem
+{
+	NSMenuItem *debugMenuItem = [[NSApp mainMenu] itemWithTitle:@"Debug"];
+	NSMenu *debugSubmenu = debugMenuItem.submenu;
+	NSMenuItem *debugBreakpointsMenuItem = [debugSubmenu itemWithTitle:@"Breakpoints"];
+	NSUInteger indexForInsertMenu = [debugSubmenu.itemArray indexOfObject:debugBreakpointsMenuItem] + 1;
+	
+	[debugSubmenu insertItem:menuItem atIndex:indexForInsertMenu];
 }
 
 - (void)setPrintBreakpoint
