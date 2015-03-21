@@ -58,14 +58,19 @@ static Tuna *sharedPlugin;
     [pluginMenu addItem:({
         NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Print Breakpoint"
                                                       action:@selector(setPrintBreakpoint)
-                                               keyEquivalent:@""];
+                                               keyEquivalent:@"'"];
+        [item setKeyEquivalentModifierMask:NSShiftKeyMask|NSCommandKeyMask];
+
         item.target = self;
         item;
     })];
+
     [pluginMenu addItem:({
         NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Backtrace Breakpoint"
                                                       action:@selector(setBacktraceBreakpoint)
-                                               keyEquivalent:@""];
+                                               keyEquivalent:@";"];
+        [item setKeyEquivalentModifierMask:NSShiftKeyMask|NSCommandKeyMask];
+
         item.target = self;
         item;
     })];
