@@ -60,6 +60,27 @@ static Tuna *sharedPlugin;
     
     NSMenu *pluginMenu = [[NSMenu alloc] initWithTitle:pluginName];
     [pluginMenu addItem:({
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Toggle Breakpoint"
+                                                      action:@selector(toggleEnableFileBreakpoint)
+                                               keyEquivalent:@"["];
+        [item setKeyEquivalentModifierMask:NSShiftKeyMask|NSCommandKeyMask];
+
+        item.target = self;
+        item;
+    })];
+    [pluginMenu addItem:({
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Clear All File Breakpoint"
+                                                      action:@selector(clearAllFileBreakpoint)
+                                               keyEquivalent:@"]"];
+        [item setKeyEquivalentModifierMask:NSShiftKeyMask|NSCommandKeyMask];
+
+        item.target = self;
+        item;
+    })];
+    
+    [pluginMenu addItem:[NSMenuItem separatorItem]];
+    
+    [pluginMenu addItem:({
         NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Print Breakpoint"
                                                       action:@selector(setPrintBreakpoint)
                                                keyEquivalent:@"'"];
@@ -68,7 +89,6 @@ static Tuna *sharedPlugin;
         item.target = self;
         item;
     })];
-
     [pluginMenu addItem:({
         NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Backtrace Breakpoint"
                                                       action:@selector(setBacktraceBreakpoint)
@@ -92,6 +112,30 @@ static Tuna *sharedPlugin;
 	NSUInteger indexForInsertMenu = [debugSubmenu.itemArray indexOfObject:debugBreakpointsMenuItem] + 1;
 	
 	[debugSubmenu insertItem:menuItem atIndex:indexForInsertMenu];
+}
+
+#pragma mark - menu selector
+
+- (void)toggleEnableFileBreakpoint
+{
+    long long lineNumber = [self currentSourceCodeEditor]._currentOneBasedLineNubmer;
+    DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
+    IDEFileBreakpoint *breakpoint = [self fileBreakpointAtDocumentLocation:documentLocation];
+    [breakpoint toggleShouldBeEnabled];
+}
+
+- (void)clearAllFileBreakpoint
+{
+    IDEWorkspace *workspace = [self currentWorkspace];
+    NSMutableIndexSet *target = [NSMutableIndexSet indexSet];
+    NSUInteger index = 0;
+    for (IDEBreakpoint *breakpoint in workspace.breakpointManager.breakpoints) {
+        if ([breakpoint isKindOfClass:[IDEFileBreakpoint class]]) {
+            [target addIndex:index];
+        }
+        index++;
+    }
+    [workspace.breakpointManager.mutableBreakpoints removeObjectsAtIndexes:target];
 }
 
 - (void)setPrintBreakpoint

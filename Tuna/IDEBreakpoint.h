@@ -15,4 +15,6 @@
 @property(readonly) NSMutableArray *mutableActions;
 @property BOOL continueAfterRunningActions;
 
+- (void)toggleShouldBeEnabled;
+
 @end
