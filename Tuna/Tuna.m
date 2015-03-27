@@ -100,18 +100,18 @@ static Tuna *sharedPlugin;
     })];
     
     pluginMenuItem.submenu = pluginMenu;
-	
+    
     [self installMenuItem:pluginMenuItem];
 }
 
 - (void)installMenuItem:(NSMenuItem *)menuItem
 {
-	NSMenuItem *debugMenuItem = [[NSApp mainMenu] itemWithTitle:@"Debug"];
-	NSMenu *debugSubmenu = debugMenuItem.submenu;
-	NSMenuItem *debugBreakpointsMenuItem = [debugSubmenu itemWithTitle:@"Breakpoints"];
-	NSUInteger indexForInsertMenu = [debugSubmenu.itemArray indexOfObject:debugBreakpointsMenuItem] + 1;
-	
-	[debugSubmenu insertItem:menuItem atIndex:indexForInsertMenu];
+    NSMenuItem *debugMenuItem = [[NSApp mainMenu] itemWithTitle:@"Debug"];
+    NSMenu *debugSubmenu = debugMenuItem.submenu;
+    NSMenuItem *debugBreakpointsMenuItem = [debugSubmenu itemWithTitle:@"Breakpoints"];
+    NSUInteger indexForInsertMenu = [debugSubmenu.itemArray indexOfObject:debugBreakpointsMenuItem] + 1;
+    
+    [debugSubmenu insertItem:menuItem atIndex:indexForInsertMenu];
 }
 
 #pragma mark - menu selector
