@@ -55,6 +55,10 @@ shortcut word
 
 - [Toshihiro Morimoto](http://github.com/dealforest) ([@dealforest](https://twitter.com/dealforest))
 
+### Changes
+
+See [Releases](https://github.com/dealforest/Tuna/releases).
+
 ### License
 
 Tuna is released under the MIT license. See LICENSE for details.
