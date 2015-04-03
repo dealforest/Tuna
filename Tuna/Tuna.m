@@ -14,12 +14,32 @@ static id _sharedInstance = nil;
 
 static Tuna *sharedPlugin;
 
+/// SourceCodeEditor Type.
+typedef NS_ENUM(NSInteger, EditorType)
+{
+    EditorTypeOther,
+    EditorTypeSourceCodeEditor,
+    EditorTypeSourceCodeComparisonEditor
+};
+
 @interface Tuna()
 
 @property (nonatomic, strong, readwrite) NSBundle *bundle;
 
 /// Install Tuna menu item in Xcode.
 - (void)installMenuItem:(NSMenuItem*)menu;
+
+/// Get type of the editor.
+- (EditorType)editorTypeOf:(IDEEditor*)editor;
+
+/// Returns whether a SourceCodeComparisonEditor's primary editor is key editor.
+- (BOOL)isKeyEditorEqualToPrimaryEditor:(IDESourceCodeComparisonEditor*)sourceCodeComparisonEditor;
+
+/// Get key SourceCodeEditor from a SourceCodeComparisonEditor.
+- (IDESourceCodeEditor *)getKeySourceCodeEditor:(IDESourceCodeComparisonEditor*)sourceCodeComparisonEditor;
+
+/// Get key SourceCodeEditor from a SourceCodeComparisonEditor. If the SourceCodeComparisonEditor's primary editor is not key editor, return nil.
+- (IDESourceCodeEditor *)getKeySourceCodeEditorOnlyIfKeyEditorIsEqualToPrimaryEditor:(IDESourceCodeComparisonEditor*)sourceCodeComparisonEditor;
 
 @end
 
@@ -248,14 +268,70 @@ static Tuna *sharedPlugin;
     }
 }
 
+- (EditorType)editorTypeOf:(IDEEditor *)editor
+{
+    NSDictionary* editors = @{
+                         @"IDESourceCodeEditor" : @(EditorTypeSourceCodeEditor),
+                         @"IDESourceCodeComparisonEditor" : @(EditorTypeSourceCodeComparisonEditor)
+                         };
+    
+    for (NSString* className in editors.allKeys)
+    {
+        if ([editor isKindOfClass:NSClassFromString(className)])
+        {
+            return (EditorType)[editors[className] integerValue];
+        }
+    }
+    
+    return EditorTypeOther;
+}
+
 - (IDESourceCodeEditor *)currentSourceCodeEditor
 {
     IDEEditor *editor = [self currentEditor];
-    if ([editor isKindOfClass:NSClassFromString(@"IDESourceCodeEditor")]) {
-        return (IDESourceCodeEditor *)editor;
+    
+    switch ([self editorTypeOf:editor])
+    {
+        case EditorTypeSourceCodeEditor:
+            return (IDESourceCodeEditor *)editor;
+
+        case EditorTypeSourceCodeComparisonEditor:
+            return [self getKeySourceCodeEditorOnlyIfKeyEditorIsEqualToPrimaryEditor:(IDESourceCodeComparisonEditor*)editor];
+            
+        case EditorTypeOther:
+            return nil;
     }
-    else {
+}
+
+- (BOOL)isKeyEditorEqualToPrimaryEditor:(IDESourceCodeComparisonEditor*)sourceCodeComparisonEditor
+{
+    return sourceCodeComparisonEditor.keyEditor == sourceCodeComparisonEditor.primaryEditorInstance;
+}
+
+- (IDESourceCodeEditor *)getKeySourceCodeEditorOnlyIfKeyEditorIsEqualToPrimaryEditor:(IDESourceCodeComparisonEditor*)sourceCodeComparisonEditor
+{
+    if ([self isKeyEditorEqualToPrimaryEditor:sourceCodeComparisonEditor])
+    {
+        return [self getKeySourceCodeEditor:sourceCodeComparisonEditor];
+    }
+    else
+    {
         return nil;
+    }
+}
+
+- (IDESourceCodeEditor *)getKeySourceCodeEditor:(IDESourceCodeComparisonEditor*)sourceCodeComparisonEditor
+{
+    IDEEditor *editor = sourceCodeComparisonEditor.keyEditor;
+    
+    switch ([self editorTypeOf:editor])
+    {
+        case EditorTypeSourceCodeEditor:
+            return (IDESourceCodeEditor*)editor;
+            
+        case EditorTypeSourceCodeComparisonEditor:
+        case EditorTypeOther:
+            return nil;
     }
 }
 
