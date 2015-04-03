@@ -147,7 +147,14 @@ static Tuna *sharedPlugin;
         return;
     }
     
-    long long lineNumber = [self currentSourceCodeEditor]._currentOneBasedLineNubmer + 1;
+    IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
+    
+    if (!currentSourceCodeEditor)
+    {
+        return;
+    }
+
+    long long lineNumber = currentSourceCodeEditor._currentOneBasedLineNubmer + 1;
     DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
     IDEFileBreakpoint *breakpoint = [self fileBreakpointAtDocumentLocation:documentLocation];
     [breakpoint.mutableActions addObject:({
@@ -164,7 +171,14 @@ static Tuna *sharedPlugin;
 
 - (void)setBacktraceBreakpoint
 {
-    long long lineNumber = [self currentSourceCodeEditor]._currentOneBasedLineNubmer;
+    IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
+    
+    if (!currentSourceCodeEditor)
+    {
+        return;
+    }
+
+    long long lineNumber = currentSourceCodeEditor._currentOneBasedLineNubmer;
     DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
     IDEFileBreakpoint *breakpoint = [self fileBreakpointAtDocumentLocation:documentLocation];
     [breakpoint.mutableActions addObject:({
