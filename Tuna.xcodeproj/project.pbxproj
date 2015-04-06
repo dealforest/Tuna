@@ -109,6 +109,7 @@
 				5ECDEFB21AAF414B00F8EC91 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		5ECDEFB21AAF414B00F8EC91 /* Products */ = {
 			isa = PBXGroup;
