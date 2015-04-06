@@ -45,6 +45,7 @@
 		5EF099551AB2002C00AE2462 /* IDEEditorHistoryStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEEditorHistoryStack.h; sourceTree = "<group>"; };
 		5EF099561AB2008F00AE2462 /* IDEEditorHistoryItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEEditorHistoryItem.h; sourceTree = "<group>"; };
 		5EF5F0891AAF5581001CC293 /* IDEEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEEditor.h; sourceTree = "<group>"; };
+		B17EF2B01ACEB711000CF74F /* IDEComparisonEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEComparisonEditor.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +95,7 @@
 				5E692F7B1AAF4C2B006780D4 /* IDEEditorArea.h */,
 				5ECDEFC81AAF457300F8EC91 /* IDESourceCodeEditor.h */,
 				5E692F7A1AAF4B86006780D4 /* IDESourceCodeComparisonEditor.h */,
+				B17EF2B01ACEB711000CF74F /* IDEComparisonEditor.h */,
 				5EC687DD1AAF4812004DC13C /* IDELogBreakpointAction.h */,
 				5EF099551AB2002C00AE2462 /* IDEEditorHistoryStack.h */,
 				5EF099561AB2008F00AE2462 /* IDEEditorHistoryItem.h */,

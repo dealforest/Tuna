@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @class DVTSourceTextView;
+@class IDEComparisonEditor;
 
-@interface IDESourceCodeComparisonEditor : NSObject
+@interface IDESourceCodeComparisonEditor : IDEComparisonEditor
 
 @property(readonly) DVTSourceTextView *keyTextView;
 

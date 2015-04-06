@@ -24,6 +24,7 @@
 #import "IDEEditorContext.h"
 #import "IDEEditorArea.h"
 #import "IDESourceCodeEditor.h"
+#import "IDEComparisonEditor.h"
 #import "IDESourceCodeComparisonEditor.h"
 #import "IDELogBreakpointAction.h"
 #import "IDEEditorHistoryStack.h"
