@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="l11-Nk-Qzd">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="c9f-wW-Udb">
+            <objects>
+                <windowController id="l11-Nk-Qzd" sceneMemberID="viewController">
+                    <window key="window" title="Tuna Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="b7x-UP-7IG" customClass="TUNAWindowView">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="294" y="362" width="500" height="250"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+                    </window>
+                    <connections>
+                        <segue destination="utc-Nz-yCf" kind="relationship" relationship="window.shadowedContentViewController" id="5ES-NJ-5KO"/>
+                    </connections>
+                </windowController>
+                <customObject id="2Zl-tJ-Act" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="245" y="590"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="29M-QL-Wbh">
+            <objects>
+                <viewController id="utc-Nz-yCf" sceneMemberID="viewController">
+                    <view key="view" id="8kS-ha-eqL">
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="250"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g0t-Ut-x4O">
+                                <rect key="frame" x="0.0" y="0.0" width="500" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="500" id="4Xl-fF-OEU"/>
+                                    <constraint firstAttribute="height" constant="250" id="CVF-ck-Kvb"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo" id="7fJ-NP-1L5"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="g0t-Ut-x4O" secondAttribute="centerY" id="ZAf-fO-TYf"/>
+                            <constraint firstAttribute="centerX" secondItem="g0t-Ut-x4O" secondAttribute="centerX" id="gtx-cc-Xry"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="xF4-ND-FT9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="857" y="582"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo" width="1000" height="500"/>
+    </resources>
+</document>

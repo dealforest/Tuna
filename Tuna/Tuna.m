@@ -9,6 +9,10 @@
 #import "Tuna.h"
 #import "Xcode.h"
 
+#import "TUNAPreferencePanelWindowController.h"
+
+#define ISSUE_REPORT_URL @"https://github.com/dealforest/Tuna/issues"
+
 static id _sharedInstance = nil;
 
 
@@ -25,6 +29,8 @@ typedef NS_ENUM(NSInteger, EditorType)
 @interface Tuna()
 
 @property (nonatomic, strong, readwrite) NSBundle *bundle;
+@property (nonatomic, strong) TUNAPreferencePanelWindowController *preferencePanel;
+
 
 /// Install Tuna menu item in Xcode.
 - (void)installMenuItem:(NSMenuItem*)menu;
@@ -71,7 +77,6 @@ typedef NS_ENUM(NSInteger, EditorType)
 
 - (void)createMenuItem
 {
-    
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSString *pluginName = [bundle objectForInfoDictionaryKey:(NSString *)kCFBundleNameKey];
     NSString *pluginVersion = [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
@@ -81,6 +86,13 @@ typedef NS_ENUM(NSInteger, EditorType)
         NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[@"Plugin Version: " stringByAppendingString:pluginVersion]
                                                       action:nil
                                                keyEquivalent:@""];
+        item;
+    })];
+    [pluginMenu addItem:({
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Preferences..."
+                                                      action:@selector(openPreferencesWindow)
+                                               keyEquivalent:@""];
+        item.target = self;
         item;
     })];
     
@@ -142,6 +154,12 @@ typedef NS_ENUM(NSInteger, EditorType)
 }
 
 #pragma mark - menu selector
+
+- (void)openPreferencesWindow
+{
+    self.preferencePanel = [[TUNAPreferencePanelWindowController alloc] initWithWindowNibName:@"TUNAPreferenceWindowController"];
+    [self.preferencePanel showWindow:self];
+}
 
 - (void)toggleEnableFileBreakpoint
 {

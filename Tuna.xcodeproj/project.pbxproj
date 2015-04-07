@@ -10,10 +10,14 @@
 		5E78A0EE1AAF5C1B008832A8 /* IDEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0ED1AAF5C1B008832A8 /* IDEKit.framework */; };
 		5E78A0F01AAF5C22008832A8 /* IDEFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0EF1AAF5C22008832A8 /* IDEFoundation.framework */; };
 		5E78A0F61AAF5C5B008832A8 /* DVTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0F51AAF5C5B008832A8 /* DVTFoundation.framework */; };
-		5ECDEFB51AAF414B00F8EC91 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECDEFB41AAF414B00F8EC91 /* AppKit.framework */; };
+		5E7AF9621AD44E77007008A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7AF9611AD44E77007008A4 /* Cocoa.framework */; };
+		5EA9535A1AD447D400DA95F9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EA953591AD447D400DA95F9 /* Images.xcassets */; };
 		5ECDEFB71AAF414B00F8EC91 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECDEFB61AAF414B00F8EC91 /* Foundation.framework */; };
 		5ECDEFBC1AAF414B00F8EC91 /* Tuna.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5ECDEFBB1AAF414B00F8EC91 /* Tuna.xcscheme */; };
 		5ECDEFBF1AAF414B00F8EC91 /* Tuna.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECDEFBE1AAF414B00F8EC91 /* Tuna.m */; };
+		5EFDDD731ADFCED30032D9B1 /* TUNAPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFDDD721ADFCED30032D9B1 /* TUNAPreferences.m */; };
+		5EFDDD771ADFCEF20032D9B1 /* TUNAPreferencePanelWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFDDD751ADFCEF20032D9B1 /* TUNAPreferencePanelWindowController.m */; };
+		5EFDDD781ADFCEF20032D9B1 /* TUNAPreferencePanelWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EFDDD761ADFCEF20032D9B1 /* TUNAPreferencePanelWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +29,10 @@
 		5E78A0ED1AAF5C1B008832A8 /* IDEKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDEKit.framework; path = ../../../../../../Applications/Xcode.app/Contents/Frameworks/IDEKit.framework; sourceTree = "<group>"; };
 		5E78A0EF1AAF5C22008832A8 /* IDEFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDEFoundation.framework; path = ../../../../../../Applications/Xcode.app/Contents/Frameworks/IDEFoundation.framework; sourceTree = "<group>"; };
 		5E78A0F51AAF5C5B008832A8 /* DVTFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DVTFoundation.framework; path = ../../../../../../Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework; sourceTree = "<group>"; };
+		5E7AF9611AD44E77007008A4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		5E7AF9631AD44E8A007008A4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		5E7AF9651AD44E97007008A4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5EA953591AD447D400DA95F9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5EC687DB1AAF475C004DC13C /* IDEFileBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEFileBreakpoint.h; sourceTree = "<group>"; };
 		5EC687DC1AAF47C9004DC13C /* IDEBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEBreakpoint.h; sourceTree = "<group>"; };
 		5EC687DD1AAF4812004DC13C /* IDELogBreakpointAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDELogBreakpointAction.h; sourceTree = "<group>"; };
@@ -45,6 +53,11 @@
 		5EF099551AB2002C00AE2462 /* IDEEditorHistoryStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEEditorHistoryStack.h; sourceTree = "<group>"; };
 		5EF099561AB2008F00AE2462 /* IDEEditorHistoryItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEEditorHistoryItem.h; sourceTree = "<group>"; };
 		5EF5F0891AAF5581001CC293 /* IDEEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEEditor.h; sourceTree = "<group>"; };
+		5EFDDD711ADFCED30032D9B1 /* TUNAPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUNAPreferences.h; sourceTree = "<group>"; };
+		5EFDDD721ADFCED30032D9B1 /* TUNAPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUNAPreferences.m; sourceTree = "<group>"; };
+		5EFDDD741ADFCEF20032D9B1 /* TUNAPreferencePanelWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUNAPreferencePanelWindowController.h; sourceTree = "<group>"; };
+		5EFDDD751ADFCEF20032D9B1 /* TUNAPreferencePanelWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUNAPreferencePanelWindowController.m; sourceTree = "<group>"; };
+		5EFDDD761ADFCEF20032D9B1 /* TUNAPreferencePanelWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TUNAPreferencePanelWindowController.xib; sourceTree = "<group>"; };
 		B17EF2B01ACEB711000CF74F /* IDEComparisonEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEComparisonEditor.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5ECDEFB51AAF414B00F8EC91 /* AppKit.framework in Frameworks */,
+				5E7AF9621AD44E77007008A4 /* Cocoa.framework in Frameworks */,
 				5ECDEFB71AAF414B00F8EC91 /* Foundation.framework in Frameworks */,
 				5E78A0F61AAF5C5B008832A8 /* DVTFoundation.framework in Frameworks */,
 				5E78A0EE1AAF5C1B008832A8 /* IDEKit.framework in Frameworks */,
@@ -124,6 +137,9 @@
 		5ECDEFB31AAF414B00F8EC91 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E7AF9651AD44E97007008A4 /* CoreData.framework */,
+				5E7AF9631AD44E8A007008A4 /* AppKit.framework */,
+				5E7AF9611AD44E77007008A4 /* Cocoa.framework */,
 				5E78A0F51AAF5C5B008832A8 /* DVTFoundation.framework */,
 				5E78A0EF1AAF5C22008832A8 /* IDEFoundation.framework */,
 				5E78A0ED1AAF5C1B008832A8 /* IDEKit.framework */,
@@ -136,7 +152,9 @@
 		5ECDEFB81AAF414B00F8EC91 /* Tuna */ = {
 			isa = PBXGroup;
 			children = (
+				5EA953591AD447D400DA95F9 /* Images.xcassets */,
 				5ECDEFC51AAF42C800F8EC91 /* Xcode */,
+				5EFDDD6D1ADFC8BA0032D9B1 /* Preferences */,
 				5ECDEFBD1AAF414B00F8EC91 /* Tuna.h */,
 				5ECDEFBE1AAF414B00F8EC91 /* Tuna.m */,
 				5ECDEFB91AAF414B00F8EC91 /* Supporting Files */,
@@ -162,6 +180,18 @@
 				5E78A0F91AAF5CD0008832A8 /* IDEKit */,
 			);
 			name = Xcode;
+			sourceTree = "<group>";
+		};
+		5EFDDD6D1ADFC8BA0032D9B1 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				5EFDDD711ADFCED30032D9B1 /* TUNAPreferences.h */,
+				5EFDDD721ADFCED30032D9B1 /* TUNAPreferences.m */,
+				5EFDDD741ADFCEF20032D9B1 /* TUNAPreferencePanelWindowController.h */,
+				5EFDDD751ADFCEF20032D9B1 /* TUNAPreferencePanelWindowController.m */,
+				5EFDDD761ADFCEF20032D9B1 /* TUNAPreferencePanelWindowController.xib */,
+			);
+			name = Preferences;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,7 +250,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EA9535A1AD447D400DA95F9 /* Images.xcassets in Resources */,
 				5ECDEFBC1AAF414B00F8EC91 /* Tuna.xcscheme in Resources */,
+				5EFDDD781ADFCEF20032D9B1 /* TUNAPreferencePanelWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,7 +263,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EFDDD731ADFCED30032D9B1 /* TUNAPreferences.m in Sources */,
 				5ECDEFBF1AAF414B00F8EC91 /* Tuna.m in Sources */,
+				5EFDDD771ADFCEF20032D9B1 /* TUNAPreferencePanelWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
