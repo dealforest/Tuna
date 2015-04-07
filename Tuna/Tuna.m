@@ -358,14 +358,17 @@ typedef NS_ENUM(NSInteger, EditorType)
 - (NSTextView *)currentSourceCodeTextView
 {
     IDEEditor *editor = [self currentEditor];
-    if ([editor isKindOfClass:NSClassFromString(@"IDESourceCodeEditor")]) {
-        return (NSTextView *)editor.textView;
-    }
-    else if ([editor isKindOfClass:NSClassFromString(@"IDESourceCodeComparisonEditor")]) {
-        return (NSTextView *)((IDESourceCodeComparisonEditor *)editor).keyTextView;
-    }
-    else {
-        return nil;
+    
+    switch ([self editorTypeOf:editor])
+    {
+        case EditorTypeSourceCodeEditor:
+            return (NSTextView *)editor.textView;
+            
+        case EditorTypeSourceCodeComparisonEditor:
+            return (NSTextView *)((IDESourceCodeComparisonEditor *)editor).keyTextView;
+            
+        case EditorTypeOther:
+            return nil;
     }
 }
 
