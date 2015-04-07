@@ -73,12 +73,28 @@ typedef NS_ENUM(NSInteger, EditorType)
 {
     
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSString *pluginName = [bundle objectForInfoDictionaryKey:@"CFBundleName"];
-    NSMenuItem *pluginMenuItem = [[NSMenuItem alloc] initWithTitle:pluginName
-                                                            action:nil
-                                                     keyEquivalent:@""];
+    NSString *pluginName = [bundle objectForInfoDictionaryKey:(NSString *)kCFBundleNameKey];
+    NSString *pluginVersion = [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     
     NSMenu *pluginMenu = [[NSMenu alloc] initWithTitle:pluginName];
+    [pluginMenu addItem:({
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[@"Plugin Version: " stringByAppendingString:pluginVersion]
+                                                      action:nil
+                                               keyEquivalent:@""];
+        item;
+    })];
+    
+    [pluginMenu addItem:[NSMenuItem separatorItem]];
+    
+    [pluginMenu addItem:({
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Toggle Breakpoint"
+                                                      action:@selector(toggleEnableFileBreakpoint)
+                                               keyEquivalent:@"["];
+        [item setKeyEquivalentModifierMask:NSShiftKeyMask|NSCommandKeyMask];
+
+        item.target = self;
+        item;
+    })];
     [pluginMenu addItem:({
         NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Toggle Breakpoint"
                                                       action:@selector(toggleEnableFileBreakpoint)
@@ -119,8 +135,8 @@ typedef NS_ENUM(NSInteger, EditorType)
         item;
     })];
     
+    NSMenuItem *pluginMenuItem = [[NSMenuItem alloc] initWithTitle:pluginName action:nil keyEquivalent:@""];
     pluginMenuItem.submenu = pluginMenu;
-    
     [self installMenuItem:pluginMenuItem];
 }
 
