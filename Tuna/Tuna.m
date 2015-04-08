@@ -180,6 +180,7 @@ typedef NS_ENUM(NSInteger, EditorType)
     NSString *selectedText = [[textView.string substringWithRange:textView.selectedRange]
                               stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if (selectedText.length == 0) {
+        NSBeep();
         return;
     }
     
@@ -187,6 +188,7 @@ typedef NS_ENUM(NSInteger, EditorType)
     
     if (!currentSourceCodeEditor)
     {
+        NSBeep();
         return;
     }
 
@@ -216,6 +218,7 @@ typedef NS_ENUM(NSInteger, EditorType)
     
     if (!currentSourceCodeEditor)
     {
+        NSBeep();
         return;
     }
 
