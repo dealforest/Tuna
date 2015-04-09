@@ -12,6 +12,7 @@
 
 @interface IDESourceCodeEditor : IDEEditor
 
-- (long long)_currentOneBasedLineNubmer;
+- (long long)_currentOneBasedLineNumber;
+- (long long)_currentOneBasedLineNubmer; // for under Xcode version 6.3
 
 @end
