@@ -145,7 +145,15 @@ typedef NS_ENUM(NSInteger, EditorType)
 
 - (void)toggleEnableFileBreakpoint
 {
-    long long lineNumber = [self currentSourceCodeEditor]._currentOneBasedLineNubmer;
+    IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
+    
+    if (!currentSourceCodeEditor)
+    {
+        NSBeep();
+        return;
+    }
+    
+    long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor];
     DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
     IDEFileBreakpoint *breakpoint = [self fileBreakpointAtDocumentLocation:documentLocation];
     [breakpoint toggleShouldBeEnabled];
@@ -183,7 +191,7 @@ typedef NS_ENUM(NSInteger, EditorType)
         return;
     }
 
-    long long lineNumber = currentSourceCodeEditor._currentOneBasedLineNubmer + 1;
+    long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor] + 1;
     DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
     IDEFileBreakpoint *breakpoint = [self fileBreakpointAtDocumentLocation:documentLocation];
     [breakpoint.mutableActions addObject:({
@@ -213,7 +221,7 @@ typedef NS_ENUM(NSInteger, EditorType)
         return;
     }
 
-    long long lineNumber = currentSourceCodeEditor._currentOneBasedLineNubmer;
+    long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor];
     DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
     IDEFileBreakpoint *breakpoint = [self fileBreakpointAtDocumentLocation:documentLocation];
     [breakpoint.mutableActions addObject:({
@@ -380,6 +388,11 @@ typedef NS_ENUM(NSInteger, EditorType)
         case EditorTypeOther:
             return nil;
     }
+}
+
+- (long long)currentLineNumberWithEditor:(IDESourceCodeEditor *)editor
+{
+    return [editor respondsToSelector:@selector(_currentOneBasedLineNumber)] ? editor._currentOneBasedLineNumber : editor._currentOneBasedLineNubmer;
 }
 
 @end
