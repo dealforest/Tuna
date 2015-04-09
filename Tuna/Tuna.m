@@ -155,8 +155,10 @@ typedef NS_ENUM(NSInteger, EditorType)
     
     long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor];
     DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
-    IDEFileBreakpoint *breakpoint = [self fileBreakpointAtDocumentLocation:documentLocation];
-    [breakpoint toggleShouldBeEnabled];
+    IDEFileBreakpoint *breakpoint = [[self currentWorkspace].breakpointManager fileBreakpointAtDocumentLocation:documentLocation];
+    if (breakpoint) {
+        [breakpoint toggleShouldBeEnabled];
+    }
 }
 
 - (void)clearAllFileBreakpoint
