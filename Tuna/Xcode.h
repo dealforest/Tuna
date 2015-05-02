@@ -29,3 +29,6 @@
 #import "IDELogBreakpointAction.h"
 #import "IDEEditorHistoryStack.h"
 #import "IDEEditorHistoryItem.h"
+
+// DebuggerUI
+#import "IDEBreakpointEditorPopoverViewController.h"
