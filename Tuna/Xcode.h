@@ -9,6 +9,9 @@
 // DVFoundation
 #import "DVTTextDocumentLocation.h"
 
+// DVTKit
+#import "DVTTextSidebarView.h"
+
 // IDEFoundation
 #import "IDEWorkspace.h"
 #import "IDEBreakpointManager.h"

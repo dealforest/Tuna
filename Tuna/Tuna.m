@@ -8,6 +8,7 @@
 
 #import "Tuna.h"
 #import "Xcode.h"
+#import <objc/runtime.h>
 
 static id _sharedInstance = nil;
 
@@ -121,6 +122,26 @@ typedef NS_ENUM(NSInteger, EditorType)
         })];
     }
     
+    [pluginMenu addItem:[NSMenuItem separatorItem]];
+    {
+        [pluginMenu addItem:({
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Breakpoint with Input Message"
+                                                          action:@selector(setBreakpointWithInputMessage)
+                                                   keyEquivalent:@"'"];
+            [item setKeyEquivalentModifierMask:NSShiftKeyMask | NSCommandKeyMask];
+            item.target = self;
+            item;
+        })];
+        [pluginMenu addItem:({
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Breakpoint with Input Command"
+                                                          action:@selector(setBreakpointWithInputCommand)
+                                                   keyEquivalent:@"'"];
+            [item setKeyEquivalentModifierMask:NSShiftKeyMask | NSCommandKeyMask];
+            item.target = self;
+            item;
+        })];
+    }
+    
     NSMenuItem *pluginMenuItem = [[NSMenuItem alloc] initWithTitle:pluginName action:nil keyEquivalent:@""];
     pluginMenuItem.submenu = pluginMenu;
     [self installMenuItem:pluginMenuItem];
@@ -142,8 +163,7 @@ typedef NS_ENUM(NSInteger, EditorType)
 {
     IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
     
-    if (!currentSourceCodeEditor)
-    {
+    if (!currentSourceCodeEditor) {
         NSBeep();
         return;
     }
@@ -182,8 +202,7 @@ typedef NS_ENUM(NSInteger, EditorType)
     
     IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
     
-    if (!currentSourceCodeEditor)
-    {
+    if (!currentSourceCodeEditor) {
         NSBeep();
         return;
     }
@@ -206,16 +225,13 @@ typedef NS_ENUM(NSInteger, EditorType)
         action.consoleCommand = @"bt 0";
         action;
     })];
-    
-    [IDEBreakpointEditorPopoverViewController showEditorForBreakpoint:breakpoint relativeToRect:CGRectMake(0, 0, 100, 100) ofView:currentSourceCodeEditor.containerView];
 }
 
 - (void)setBacktraceBreakpoint
 {
     IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
     
-    if (!currentSourceCodeEditor)
-    {
+    if (!currentSourceCodeEditor) {
         NSBeep();
         return;
     }
@@ -233,6 +249,66 @@ typedef NS_ENUM(NSInteger, EditorType)
         action.consoleCommand = @"bt 5";
         action;
     })];
+}
+
+- (void)setBreakpointWithInputMessage
+{
+    IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
+    if (!currentSourceCodeEditor) {
+        NSBeep();
+        return;
+    }
+
+    long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor];
+    IDEWorkspace *workspace = [self currentWorkspace];
+    DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
+    if ([workspace.breakpointManager fileBreakpointAtDocumentLocation:documentLocation]) {
+        NSBeep();
+        return;
+    }
+    
+    Ivar ivar = class_getInstanceVariable(object_getClass(currentSourceCodeEditor), "_sidebarView");
+    if (ivar) {
+        DVTTextSidebarView *sidebarView = (DVTTextSidebarView *)object_getIvar(currentSourceCodeEditor, ivar);
+        
+        IDEFileBreakpoint *breakpoint = [workspace.breakpointManager createFileBreakpointAtDocumentLocation:documentLocation];
+        breakpoint.continueAfterRunningActions = YES;
+        [breakpoint.mutableActions addObject:[IDELogBreakpointAction new]];
+    
+        [IDEBreakpointEditorPopoverViewController showEditorForBreakpoint:breakpoint
+                                                           relativeToRect:NSZeroRect
+                                                                   ofView:sidebarView];
+    }
+}
+
+- (void)setBreakpointWithInputCommand
+{
+    IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
+    if (!currentSourceCodeEditor) {
+        NSBeep();
+        return;
+    }
+
+    long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor];
+    IDEWorkspace *workspace = [self currentWorkspace];
+    DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
+    if ([workspace.breakpointManager fileBreakpointAtDocumentLocation:documentLocation]) {
+        NSBeep();
+        return;
+    }
+    
+    Ivar ivar = class_getInstanceVariable(object_getClass(currentSourceCodeEditor), "_sidebarView");
+    if (ivar) {
+        DVTTextSidebarView *sidebarView = (DVTTextSidebarView *)object_getIvar(currentSourceCodeEditor, ivar);
+        
+        IDEFileBreakpoint *breakpoint = [workspace.breakpointManager createFileBreakpointAtDocumentLocation:documentLocation];
+        breakpoint.continueAfterRunningActions = YES;
+        [breakpoint.mutableActions addObject:[IDEDebuggerCommandBreakpointAction new]];
+    
+        [IDEBreakpointEditorPopoverViewController showEditorForBreakpoint:breakpoint
+                                                           relativeToRect:NSZeroRect
+                                                                   ofView:sidebarView];
+    }
 }
 
 #pragma mark - private

@@ -19,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E1FB4121AF6847500276547 /* DVTTextSidebarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DVTTextSidebarView.h; sourceTree = "<group>"; };
 		5E692F771AAF4A8B006780D4 /* IDEWorkspaceDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEWorkspaceDocument.h; sourceTree = "<group>"; };
 		5E692F781AAF4AED006780D4 /* IDEWorkspaceWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEWorkspaceWindowController.h; sourceTree = "<group>"; };
 		5E692F791AAF4B3C006780D4 /* IDEEditorContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEEditorContext.h; sourceTree = "<group>"; };
@@ -70,6 +71,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E1FB4111AF6845A00276547 /* DVTKit */ = {
+			isa = PBXGroup;
+			children = (
+				5E1FB4121AF6847500276547 /* DVTTextSidebarView.h */,
+			);
+			name = DVTKit;
+			sourceTree = "<group>";
+		};
 		5E78A0F71AAF5CBE008832A8 /* DVFoundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +183,7 @@
 			children = (
 				5ECDEFC61AAF42DE00F8EC91 /* Xcode.h */,
 				5E78A0F71AAF5CBE008832A8 /* DVFoundation */,
+				5E1FB4111AF6845A00276547 /* DVTKit */,
 				5E78A0F81AAF5CC6008832A8 /* IDEFoundation */,
 				5E78A0F91AAF5CD0008832A8 /* IDEKit */,
 				5E9C01A81AF4EC4B001AB771 /* DebuggerUI */,

@@ -10,7 +10,9 @@
 
 @class IDEEditor;
 
-@interface IDESourceCodeEditor : IDEEditor
+@interface IDESourceCodeEditor : IDEEditor {
+    DVTTextSidebarView *_sidebarView;
+}
 
 - (long long)_currentOneBasedLineNumber;
 - (long long)_currentOneBasedLineNubmer; // for under Xcode version 6.3
