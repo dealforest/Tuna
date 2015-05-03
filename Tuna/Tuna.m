@@ -127,7 +127,7 @@ typedef NS_ENUM(NSInteger, EditorType)
         [pluginMenu addItem:({
             NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Breakpoint with Input Message"
                                                           action:@selector(setBreakpointWithInputMessage)
-                                                   keyEquivalent:@"["];
+                                                   keyEquivalent:@"'"];
             [item setKeyEquivalentModifierMask:NSShiftKeyMask | NSControlKeyMask];
             item.target = self;
             item;
@@ -135,7 +135,7 @@ typedef NS_ENUM(NSInteger, EditorType)
         [pluginMenu addItem:({
             NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Breakpoint with Input Command"
                                                           action:@selector(setBreakpointWithInputCommand)
-                                                   keyEquivalent:@"]"];
+                                                   keyEquivalent:@";"];
             [item setKeyEquivalentModifierMask:NSShiftKeyMask | NSControlKeyMask];
             item.target = self;
             item;
