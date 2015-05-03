@@ -88,7 +88,7 @@ typedef NS_ENUM(NSInteger, EditorType)
             NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Toggle Breakpoint"
                                                           action:@selector(toggleEnableFileBreakpoint)
                                                    keyEquivalent:@"["];
-            [item setKeyEquivalentModifierMask:NSShiftKeyMask | NSCommandKeyMask];
+            [item setKeyEquivalentModifierMask:NSShiftKeyMask | NSControlKeyMask];
             item.target = self;
             item;
         })];
@@ -96,7 +96,7 @@ typedef NS_ENUM(NSInteger, EditorType)
             NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Clear All File Breakpoint"
                                                           action:@selector(clearAllFileBreakpoint)
                                                    keyEquivalent:@"]"];
-            [item setKeyEquivalentModifierMask:NSShiftKeyMask | NSCommandKeyMask];
+            [item setKeyEquivalentModifierMask:NSShiftKeyMask | NSControlKeyMask];
             item.target = self;
             item;
         })];
