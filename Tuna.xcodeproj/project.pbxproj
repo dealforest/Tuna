@@ -10,6 +10,8 @@
 		5E78A0EE1AAF5C1B008832A8 /* IDEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0ED1AAF5C1B008832A8 /* IDEKit.framework */; };
 		5E78A0F01AAF5C22008832A8 /* IDEFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0EF1AAF5C22008832A8 /* IDEFoundation.framework */; };
 		5E78A0F61AAF5C5B008832A8 /* DVTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0F51AAF5C5B008832A8 /* DVTFoundation.framework */; };
+		5E9C01A51AF4D2E8001AB771 /* DebuggerLLDBService.ideplugin in Resources */ = {isa = PBXBuildFile; fileRef = 5E9C01A41AF4D2E8001AB771 /* DebuggerLLDBService.ideplugin */; };
+		5E9C01A71AF4D2F6001AB771 /* DebuggerUI in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9C01A61AF4D2F6001AB771 /* DebuggerUI */; };
 		5ECDEFB51AAF414B00F8EC91 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECDEFB41AAF414B00F8EC91 /* AppKit.framework */; };
 		5ECDEFB71AAF414B00F8EC91 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECDEFB61AAF414B00F8EC91 /* Foundation.framework */; };
 		5ECDEFBC1AAF414B00F8EC91 /* Tuna.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5ECDEFBB1AAF414B00F8EC91 /* Tuna.xcscheme */; };
@@ -17,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E1FB4121AF6847500276547 /* DVTTextSidebarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DVTTextSidebarView.h; sourceTree = "<group>"; };
 		5E692F771AAF4A8B006780D4 /* IDEWorkspaceDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEWorkspaceDocument.h; sourceTree = "<group>"; };
 		5E692F781AAF4AED006780D4 /* IDEWorkspaceWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEWorkspaceWindowController.h; sourceTree = "<group>"; };
 		5E692F791AAF4B3C006780D4 /* IDEEditorContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEEditorContext.h; sourceTree = "<group>"; };
@@ -25,6 +28,9 @@
 		5E78A0ED1AAF5C1B008832A8 /* IDEKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDEKit.framework; path = ../../../../../../Applications/Xcode.app/Contents/Frameworks/IDEKit.framework; sourceTree = "<group>"; };
 		5E78A0EF1AAF5C22008832A8 /* IDEFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDEFoundation.framework; path = ../../../../../../Applications/Xcode.app/Contents/Frameworks/IDEFoundation.framework; sourceTree = "<group>"; };
 		5E78A0F51AAF5C5B008832A8 /* DVTFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DVTFoundation.framework; path = ../../../../../../Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework; sourceTree = "<group>"; };
+		5E9C01A41AF4D2E8001AB771 /* DebuggerLLDBService.ideplugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DebuggerLLDBService.ideplugin; path = /Applications/Xcode.app/Contents/PlugIns/DebuggerLLDBService.ideplugin; sourceTree = "<absolute>"; };
+		5E9C01A61AF4D2F6001AB771 /* DebuggerUI */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = DebuggerUI; path = ../../../../../../Applications/Xcode.app/Contents/PlugIns/DebuggerUI.ideplugin/Contents/MacOS/DebuggerUI; sourceTree = "<group>"; };
+		5E9C01A91AF4EC8C001AB771 /* IDEBreakpointEditorPopoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEBreakpointEditorPopoverViewController.h; sourceTree = "<group>"; };
 		5EC687DB1AAF475C004DC13C /* IDEFileBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEFileBreakpoint.h; sourceTree = "<group>"; };
 		5EC687DC1AAF47C9004DC13C /* IDEBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEBreakpoint.h; sourceTree = "<group>"; };
 		5EC687DD1AAF4812004DC13C /* IDELogBreakpointAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDELogBreakpointAction.h; sourceTree = "<group>"; };
@@ -53,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E9C01A71AF4D2F6001AB771 /* DebuggerUI in Frameworks */,
 				5ECDEFB51AAF414B00F8EC91 /* AppKit.framework in Frameworks */,
 				5ECDEFB71AAF414B00F8EC91 /* Foundation.framework in Frameworks */,
 				5E78A0F61AAF5C5B008832A8 /* DVTFoundation.framework in Frameworks */,
@@ -64,6 +71,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E1FB4111AF6845A00276547 /* DVTKit */ = {
+			isa = PBXGroup;
+			children = (
+				5E1FB4121AF6847500276547 /* DVTTextSidebarView.h */,
+			);
+			name = DVTKit;
+			sourceTree = "<group>";
+		};
 		5E78A0F71AAF5CBE008832A8 /* DVFoundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +118,14 @@
 			name = IDEKit;
 			sourceTree = "<group>";
 		};
+		5E9C01A81AF4EC4B001AB771 /* DebuggerUI */ = {
+			isa = PBXGroup;
+			children = (
+				5E9C01A91AF4EC8C001AB771 /* IDEBreakpointEditorPopoverViewController.h */,
+			);
+			name = DebuggerUI;
+			sourceTree = "<group>";
+		};
 		5ECDEFA81AAF414B00F8EC91 = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +147,8 @@
 		5ECDEFB31AAF414B00F8EC91 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E9C01A61AF4D2F6001AB771 /* DebuggerUI */,
+				5E9C01A41AF4D2E8001AB771 /* DebuggerLLDBService.ideplugin */,
 				5E78A0F51AAF5C5B008832A8 /* DVTFoundation.framework */,
 				5E78A0EF1AAF5C22008832A8 /* IDEFoundation.framework */,
 				5E78A0ED1AAF5C1B008832A8 /* IDEKit.framework */,
@@ -158,8 +183,10 @@
 			children = (
 				5ECDEFC61AAF42DE00F8EC91 /* Xcode.h */,
 				5E78A0F71AAF5CBE008832A8 /* DVFoundation */,
+				5E1FB4111AF6845A00276547 /* DVTKit */,
 				5E78A0F81AAF5CC6008832A8 /* IDEFoundation */,
 				5E78A0F91AAF5CD0008832A8 /* IDEKit */,
+				5E9C01A81AF4EC4B001AB771 /* DebuggerUI */,
 			);
 			name = Xcode;
 			sourceTree = "<group>";
@@ -221,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ECDEFBC1AAF414B00F8EC91 /* Tuna.xcscheme in Resources */,
+				5E9C01A51AF4D2E8001AB771 /* DebuggerLLDBService.ideplugin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +348,10 @@
 				);
 				INFOPLIST_FILE = Tuna/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/PlugIns/DebuggerUI.ideplugin/Contents/MacOS",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xcplugin;
@@ -339,6 +371,10 @@
 				);
 				INFOPLIST_FILE = Tuna/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/PlugIns/DebuggerUI.ideplugin/Contents/MacOS",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xcplugin;

@@ -9,6 +9,9 @@
 // DVFoundation
 #import "DVTTextDocumentLocation.h"
 
+// DVTKit
+#import "DVTTextSidebarView.h"
+
 // IDEFoundation
 #import "IDEWorkspace.h"
 #import "IDEBreakpointManager.h"
@@ -29,3 +32,6 @@
 #import "IDELogBreakpointAction.h"
 #import "IDEEditorHistoryStack.h"
 #import "IDEEditorHistoryItem.h"
+
+// DebuggerUI
+#import "IDEBreakpointEditorPopoverViewController.h"

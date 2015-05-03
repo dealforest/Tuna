@@ -8,11 +8,9 @@
 
 #import "Tuna.h"
 #import "Xcode.h"
+#import <objc/runtime.h>
 
 static id _sharedInstance = nil;
-
-
-static Tuna *sharedPlugin;
 
 /// SourceCodeEditor Type.
 typedef NS_ENUM(NSInteger, EditorType)
@@ -27,19 +25,19 @@ typedef NS_ENUM(NSInteger, EditorType)
 @property (nonatomic, strong, readwrite) NSBundle *bundle;
 
 /// Install Tuna menu item in Xcode.
-- (void)installMenuItem:(NSMenuItem*)menu;
+- (void)installMenuItem:(NSMenuItem *)menu;
 
 /// Get type of the editor.
-- (EditorType)editorTypeOf:(IDEEditor*)editor;
+- (EditorType)editorTypeOf:(IDEEditor *)editor;
 
 /// Returns whether a SourceCodeComparisonEditor's primary editor is key editor.
-- (BOOL)isKeyEditorEqualToPrimaryEditor:(IDESourceCodeComparisonEditor*)sourceCodeComparisonEditor;
+- (BOOL)isKeyEditorEqualToPrimaryEditor:(IDESourceCodeComparisonEditor *)sourceCodeComparisonEditor;
 
 /// Get key SourceCodeEditor from a SourceCodeComparisonEditor.
-- (IDESourceCodeEditor *)getKeySourceCodeEditor:(IDESourceCodeComparisonEditor*)sourceCodeComparisonEditor;
+- (IDESourceCodeEditor *)getKeySourceCodeEditor:(IDESourceCodeComparisonEditor *)sourceCodeComparisonEditor;
 
 /// Get key SourceCodeEditor from a SourceCodeComparisonEditor. If the SourceCodeComparisonEditor's primary editor is not key editor, return nil.
-- (IDESourceCodeEditor *)getKeySourceCodeEditorOnlyIfKeyEditorIsEqualToPrimaryEditor:(IDESourceCodeComparisonEditor*)sourceCodeComparisonEditor;
+- (IDESourceCodeEditor *)getKeySourceCodeEditorOnlyIfKeyEditorIsEqualToPrimaryEditor:(IDESourceCodeComparisonEditor *)sourceCodeComparisonEditor;
 
 @end
 
@@ -85,46 +83,64 @@ typedef NS_ENUM(NSInteger, EditorType)
     })];
     
     [pluginMenu addItem:[NSMenuItem separatorItem]];
-    
-    [pluginMenu addItem:({
-        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Toggle Breakpoint"
-                                                      action:@selector(toggleEnableFileBreakpoint)
-                                               keyEquivalent:@"["];
-        [item setKeyEquivalentModifierMask:NSShiftKeyMask|NSCommandKeyMask];
-
-        item.target = self;
-        item;
-    })];
-    [pluginMenu addItem:({
-        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Clear All File Breakpoint"
-                                                      action:@selector(clearAllFileBreakpoint)
-                                               keyEquivalent:@"]"];
-        [item setKeyEquivalentModifierMask:NSShiftKeyMask|NSCommandKeyMask];
-
-        item.target = self;
-        item;
-    })];
+    {
+        [pluginMenu addItem:({
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Toggle Breakpoint"
+                                                          action:@selector(toggleEnableFileBreakpoint)
+                                                   keyEquivalent:@"["];
+            [item setKeyEquivalentModifierMask:NSShiftKeyMask | NSCommandKeyMask];
+            item.target = self;
+            item;
+        })];
+        [pluginMenu addItem:({
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Clear All File Breakpoint"
+                                                          action:@selector(clearAllFileBreakpoint)
+                                                   keyEquivalent:@"]"];
+            [item setKeyEquivalentModifierMask:NSShiftKeyMask | NSCommandKeyMask];
+            item.target = self;
+            item;
+        })];
+    }
     
     [pluginMenu addItem:[NSMenuItem separatorItem]];
+    {
+        [pluginMenu addItem:({
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Print Breakpoint"
+                                                          action:@selector(setPrintBreakpoint)
+                                                   keyEquivalent:@"'"];
+            [item setKeyEquivalentModifierMask:NSShiftKeyMask | NSCommandKeyMask];
+            item.target = self;
+            item;
+        })];
+        [pluginMenu addItem:({
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Backtrace Breakpoint"
+                                                          action:@selector(setBacktraceBreakpoint)
+                                                   keyEquivalent:@";"];
+            [item setKeyEquivalentModifierMask:NSShiftKeyMask | NSCommandKeyMask];
+            item.target = self;
+            item;
+        })];
+    }
     
-    [pluginMenu addItem:({
-        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Print Breakpoint"
-                                                      action:@selector(setPrintBreakpoint)
-                                               keyEquivalent:@"'"];
-        [item setKeyEquivalentModifierMask:NSShiftKeyMask|NSCommandKeyMask];
-
-        item.target = self;
-        item;
-    })];
-    [pluginMenu addItem:({
-        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Backtrace Breakpoint"
-                                                      action:@selector(setBacktraceBreakpoint)
-                                               keyEquivalent:@";"];
-        [item setKeyEquivalentModifierMask:NSShiftKeyMask|NSCommandKeyMask];
-
-        item.target = self;
-        item;
-    })];
+    [pluginMenu addItem:[NSMenuItem separatorItem]];
+    {
+        [pluginMenu addItem:({
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Breakpoint with Input Message"
+                                                          action:@selector(setBreakpointWithInputMessage)
+                                                   keyEquivalent:@"["];
+            [item setKeyEquivalentModifierMask:NSShiftKeyMask | NSControlKeyMask];
+            item.target = self;
+            item;
+        })];
+        [pluginMenu addItem:({
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Breakpoint with Input Command"
+                                                          action:@selector(setBreakpointWithInputCommand)
+                                                   keyEquivalent:@"]"];
+            [item setKeyEquivalentModifierMask:NSShiftKeyMask | NSControlKeyMask];
+            item.target = self;
+            item;
+        })];
+    }
     
     NSMenuItem *pluginMenuItem = [[NSMenuItem alloc] initWithTitle:pluginName action:nil keyEquivalent:@""];
     pluginMenuItem.submenu = pluginMenu;
@@ -147,8 +163,7 @@ typedef NS_ENUM(NSInteger, EditorType)
 {
     IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
     
-    if (!currentSourceCodeEditor)
-    {
+    if (!currentSourceCodeEditor) {
         NSBeep();
         return;
     }
@@ -187,8 +202,7 @@ typedef NS_ENUM(NSInteger, EditorType)
     
     IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
     
-    if (!currentSourceCodeEditor)
-    {
+    if (!currentSourceCodeEditor) {
         NSBeep();
         return;
     }
@@ -217,8 +231,7 @@ typedef NS_ENUM(NSInteger, EditorType)
 {
     IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
     
-    if (!currentSourceCodeEditor)
-    {
+    if (!currentSourceCodeEditor) {
         NSBeep();
         return;
     }
@@ -236,6 +249,66 @@ typedef NS_ENUM(NSInteger, EditorType)
         action.consoleCommand = @"bt 5";
         action;
     })];
+}
+
+- (void)setBreakpointWithInputMessage
+{
+    IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
+    if (!currentSourceCodeEditor) {
+        NSBeep();
+        return;
+    }
+
+    long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor];
+    IDEWorkspace *workspace = [self currentWorkspace];
+    DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
+    if ([workspace.breakpointManager fileBreakpointAtDocumentLocation:documentLocation]) {
+        NSBeep();
+        return;
+    }
+    
+    Ivar ivar = class_getInstanceVariable(object_getClass(currentSourceCodeEditor), "_sidebarView");
+    if (ivar) {
+        DVTTextSidebarView *sidebarView = (DVTTextSidebarView *)object_getIvar(currentSourceCodeEditor, ivar);
+        
+        IDEFileBreakpoint *breakpoint = [workspace.breakpointManager createFileBreakpointAtDocumentLocation:documentLocation];
+        breakpoint.continueAfterRunningActions = YES;
+        [breakpoint.mutableActions addObject:[IDELogBreakpointAction new]];
+    
+        [IDEBreakpointEditorPopoverViewController showEditorForBreakpoint:breakpoint
+                                                           relativeToRect:NSZeroRect
+                                                                   ofView:sidebarView];
+    }
+}
+
+- (void)setBreakpointWithInputCommand
+{
+    IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
+    if (!currentSourceCodeEditor) {
+        NSBeep();
+        return;
+    }
+
+    long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor];
+    IDEWorkspace *workspace = [self currentWorkspace];
+    DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
+    if ([workspace.breakpointManager fileBreakpointAtDocumentLocation:documentLocation]) {
+        NSBeep();
+        return;
+    }
+    
+    Ivar ivar = class_getInstanceVariable(object_getClass(currentSourceCodeEditor), "_sidebarView");
+    if (ivar) {
+        DVTTextSidebarView *sidebarView = (DVTTextSidebarView *)object_getIvar(currentSourceCodeEditor, ivar);
+        
+        IDEFileBreakpoint *breakpoint = [workspace.breakpointManager createFileBreakpointAtDocumentLocation:documentLocation];
+        breakpoint.continueAfterRunningActions = YES;
+        [breakpoint.mutableActions addObject:[IDEDebuggerCommandBreakpointAction new]];
+    
+        [IDEBreakpointEditorPopoverViewController showEditorForBreakpoint:breakpoint
+                                                           relativeToRect:NSZeroRect
+                                                                   ofView:sidebarView];
+    }
 }
 
 #pragma mark - private
@@ -309,15 +382,13 @@ typedef NS_ENUM(NSInteger, EditorType)
 
 - (EditorType)editorTypeOf:(IDEEditor *)editor
 {
-    NSDictionary* editors = @{
-                         @"IDESourceCodeEditor" : @(EditorTypeSourceCodeEditor),
-                         @"IDESourceCodeComparisonEditor" : @(EditorTypeSourceCodeComparisonEditor)
-                         };
+    NSDictionary *editors = @{
+                             @"IDESourceCodeEditor" : @(EditorTypeSourceCodeEditor),
+                             @"IDESourceCodeComparisonEditor" : @(EditorTypeSourceCodeComparisonEditor)
+                             };
     
-    for (NSString* className in editors.allKeys)
-    {
-        if ([editor isKindOfClass:NSClassFromString(className)])
-        {
+    for (NSString *className in editors.allKeys) {
+        if ([editor isKindOfClass:NSClassFromString(className)]) {
             return (EditorType)[editors[className] integerValue];
         }
     }
@@ -329,8 +400,7 @@ typedef NS_ENUM(NSInteger, EditorType)
 {
     IDEEditor *editor = [self currentEditor];
     
-    switch ([self editorTypeOf:editor])
-    {
+    switch ([self editorTypeOf:editor]) {
         case EditorTypeSourceCodeEditor:
             return (IDESourceCodeEditor *)editor;
 
@@ -342,29 +412,26 @@ typedef NS_ENUM(NSInteger, EditorType)
     }
 }
 
-- (BOOL)isKeyEditorEqualToPrimaryEditor:(IDESourceCodeComparisonEditor*)sourceCodeComparisonEditor
+- (BOOL)isKeyEditorEqualToPrimaryEditor:(IDESourceCodeComparisonEditor *)sourceCodeComparisonEditor
 {
     return sourceCodeComparisonEditor.keyEditor == sourceCodeComparisonEditor.primaryEditorInstance;
 }
 
-- (IDESourceCodeEditor *)getKeySourceCodeEditorOnlyIfKeyEditorIsEqualToPrimaryEditor:(IDESourceCodeComparisonEditor*)sourceCodeComparisonEditor
+- (IDESourceCodeEditor *)getKeySourceCodeEditorOnlyIfKeyEditorIsEqualToPrimaryEditor:(IDESourceCodeComparisonEditor *)sourceCodeComparisonEditor
 {
-    if ([self isKeyEditorEqualToPrimaryEditor:sourceCodeComparisonEditor])
-    {
+    if ([self isKeyEditorEqualToPrimaryEditor:sourceCodeComparisonEditor]) {
         return [self getKeySourceCodeEditor:sourceCodeComparisonEditor];
     }
-    else
-    {
+    else {
         return nil;
     }
 }
 
-- (IDESourceCodeEditor *)getKeySourceCodeEditor:(IDESourceCodeComparisonEditor*)sourceCodeComparisonEditor
+- (IDESourceCodeEditor *)getKeySourceCodeEditor:(IDESourceCodeComparisonEditor *)sourceCodeComparisonEditor
 {
     IDEEditor *editor = sourceCodeComparisonEditor.keyEditor;
     
-    switch ([self editorTypeOf:editor])
-    {
+    switch ([self editorTypeOf:editor]) {
         case EditorTypeSourceCodeEditor:
             return (IDESourceCodeEditor*)editor;
             
@@ -379,8 +446,7 @@ typedef NS_ENUM(NSInteger, EditorType)
 {
     IDEEditor *editor = [self currentEditor];
     
-    switch ([self editorTypeOf:editor])
-    {
+    switch ([self editorTypeOf:editor]) {
         case EditorTypeSourceCodeEditor:
             return (NSTextView *)editor.textView;
             
