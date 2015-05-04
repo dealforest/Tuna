@@ -10,8 +10,8 @@
 		5E78A0EE1AAF5C1B008832A8 /* IDEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0ED1AAF5C1B008832A8 /* IDEKit.framework */; };
 		5E78A0F01AAF5C22008832A8 /* IDEFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0EF1AAF5C22008832A8 /* IDEFoundation.framework */; };
 		5E78A0F61AAF5C5B008832A8 /* DVTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0F51AAF5C5B008832A8 /* DVTFoundation.framework */; };
-		5E9C01A51AF4D2E8001AB771 /* DebuggerLLDBService.ideplugin in Resources */ = {isa = PBXBuildFile; fileRef = 5E9C01A41AF4D2E8001AB771 /* DebuggerLLDBService.ideplugin */; };
 		5E9C01A71AF4D2F6001AB771 /* DebuggerUI in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9C01A61AF4D2F6001AB771 /* DebuggerUI */; };
+		5EBD1AF51AF784980089257D /* DebuggerUI.ideplugin in Resources */ = {isa = PBXBuildFile; fileRef = 5EBD1AF41AF784980089257D /* DebuggerUI.ideplugin */; };
 		5ECDEFB51AAF414B00F8EC91 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECDEFB41AAF414B00F8EC91 /* AppKit.framework */; };
 		5ECDEFB71AAF414B00F8EC91 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECDEFB61AAF414B00F8EC91 /* Foundation.framework */; };
 		5ECDEFBC1AAF414B00F8EC91 /* Tuna.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5ECDEFBB1AAF414B00F8EC91 /* Tuna.xcscheme */; };
@@ -28,9 +28,9 @@
 		5E78A0ED1AAF5C1B008832A8 /* IDEKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDEKit.framework; path = ../../../../../../Applications/Xcode.app/Contents/Frameworks/IDEKit.framework; sourceTree = "<group>"; };
 		5E78A0EF1AAF5C22008832A8 /* IDEFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDEFoundation.framework; path = ../../../../../../Applications/Xcode.app/Contents/Frameworks/IDEFoundation.framework; sourceTree = "<group>"; };
 		5E78A0F51AAF5C5B008832A8 /* DVTFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DVTFoundation.framework; path = ../../../../../../Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework; sourceTree = "<group>"; };
-		5E9C01A41AF4D2E8001AB771 /* DebuggerLLDBService.ideplugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DebuggerLLDBService.ideplugin; path = /Applications/Xcode.app/Contents/PlugIns/DebuggerLLDBService.ideplugin; sourceTree = "<absolute>"; };
 		5E9C01A61AF4D2F6001AB771 /* DebuggerUI */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = DebuggerUI; path = ../../../../../../Applications/Xcode.app/Contents/PlugIns/DebuggerUI.ideplugin/Contents/MacOS/DebuggerUI; sourceTree = "<group>"; };
 		5E9C01A91AF4EC8C001AB771 /* IDEBreakpointEditorPopoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEBreakpointEditorPopoverViewController.h; sourceTree = "<group>"; };
+		5EBD1AF41AF784980089257D /* DebuggerUI.ideplugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DebuggerUI.ideplugin; path = /Applications/Xcode.app/Contents/PlugIns/DebuggerUI.ideplugin; sourceTree = "<absolute>"; };
 		5EC687DB1AAF475C004DC13C /* IDEFileBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEFileBreakpoint.h; sourceTree = "<group>"; };
 		5EC687DC1AAF47C9004DC13C /* IDEBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEBreakpoint.h; sourceTree = "<group>"; };
 		5EC687DD1AAF4812004DC13C /* IDELogBreakpointAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDELogBreakpointAction.h; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				5E9C01A61AF4D2F6001AB771 /* DebuggerUI */,
-				5E9C01A41AF4D2E8001AB771 /* DebuggerLLDBService.ideplugin */,
+				5EBD1AF41AF784980089257D /* DebuggerUI.ideplugin */,
 				5E78A0F51AAF5C5B008832A8 /* DVTFoundation.framework */,
 				5E78A0EF1AAF5C22008832A8 /* IDEFoundation.framework */,
 				5E78A0ED1AAF5C1B008832A8 /* IDEKit.framework */,
@@ -248,7 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ECDEFBC1AAF414B00F8EC91 /* Tuna.xcscheme in Resources */,
-				5E9C01A51AF4D2E8001AB771 /* DebuggerLLDBService.ideplugin in Resources */,
+				5EBD1AF51AF784980089257D /* DebuggerUI.ideplugin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
