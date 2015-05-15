@@ -60,7 +60,7 @@ typedef NS_ENUM(NSInteger, EditorType)
 {
     self = [super init];
     if (self) {
-         [self createMenuItem];
+        [self createMenuItem];
     }
     return self;
 }

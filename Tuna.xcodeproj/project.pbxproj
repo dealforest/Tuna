@@ -10,8 +10,9 @@
 		5E78A0EE1AAF5C1B008832A8 /* IDEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0ED1AAF5C1B008832A8 /* IDEKit.framework */; };
 		5E78A0F01AAF5C22008832A8 /* IDEFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0EF1AAF5C22008832A8 /* IDEFoundation.framework */; };
 		5E78A0F61AAF5C5B008832A8 /* DVTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0F51AAF5C5B008832A8 /* DVTFoundation.framework */; };
-		5E9C01A71AF4D2F6001AB771 /* DebuggerUI in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9C01A61AF4D2F6001AB771 /* DebuggerUI */; };
-		5EBD1AF51AF784980089257D /* DebuggerUI.ideplugin in Resources */ = {isa = PBXBuildFile; fileRef = 5EBD1AF41AF784980089257D /* DebuggerUI.ideplugin */; };
+		5EA1E46A1B06680300723C7D /* DebuggerUI.ideplugin in Resources */ = {isa = PBXBuildFile; fileRef = 5EA1E4691B06680300723C7D /* DebuggerUI.ideplugin */; };
+		5EA1E46C1B06681400723C7D /* DebuggerUI in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA1E46B1B06681400723C7D /* DebuggerUI */; };
+		5EA1E4751B066B9600723C7D /* TunaSwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1E4741B066B9600723C7D /* TunaSwizzler.m */; };
 		5ECDEFB51AAF414B00F8EC91 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECDEFB41AAF414B00F8EC91 /* AppKit.framework */; };
 		5ECDEFB71AAF414B00F8EC91 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECDEFB61AAF414B00F8EC91 /* Foundation.framework */; };
 		5ECDEFBC1AAF414B00F8EC91 /* Tuna.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5ECDEFBB1AAF414B00F8EC91 /* Tuna.xcscheme */; };
@@ -28,9 +29,13 @@
 		5E78A0ED1AAF5C1B008832A8 /* IDEKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDEKit.framework; path = ../../../../../../Applications/Xcode.app/Contents/Frameworks/IDEKit.framework; sourceTree = "<group>"; };
 		5E78A0EF1AAF5C22008832A8 /* IDEFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDEFoundation.framework; path = ../../../../../../Applications/Xcode.app/Contents/Frameworks/IDEFoundation.framework; sourceTree = "<group>"; };
 		5E78A0F51AAF5C5B008832A8 /* DVTFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DVTFoundation.framework; path = ../../../../../../Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework; sourceTree = "<group>"; };
-		5E9C01A61AF4D2F6001AB771 /* DebuggerUI */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = DebuggerUI; path = ../../../../../../Applications/Xcode.app/Contents/PlugIns/DebuggerUI.ideplugin/Contents/MacOS/DebuggerUI; sourceTree = "<group>"; };
 		5E9C01A91AF4EC8C001AB771 /* IDEBreakpointEditorPopoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEBreakpointEditorPopoverViewController.h; sourceTree = "<group>"; };
-		5EBD1AF41AF784980089257D /* DebuggerUI.ideplugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DebuggerUI.ideplugin; path = /Applications/Xcode.app/Contents/PlugIns/DebuggerUI.ideplugin; sourceTree = "<absolute>"; };
+		5EA1E45C1B06576900723C7D /* DBGLLDBLauncher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBGLLDBLauncher.h; sourceTree = "<group>"; };
+		5EA1E45D1B06578D00723C7D /* DBGDebugSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBGDebugSession.h; sourceTree = "<group>"; };
+		5EA1E4691B06680300723C7D /* DebuggerUI.ideplugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DebuggerUI.ideplugin; path = ../../../../../../Applications/Xcode.app/Contents/PlugIns/DebuggerUI.ideplugin; sourceTree = "<group>"; };
+		5EA1E46B1B06681400723C7D /* DebuggerUI */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = DebuggerUI; path = ../../../../../../Applications/Xcode.app/Contents/PlugIns/DebuggerUI.ideplugin/Contents/MacOS/DebuggerUI; sourceTree = "<group>"; };
+		5EA1E4731B066B9600723C7D /* TunaSwizzler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TunaSwizzler.h; sourceTree = "<group>"; };
+		5EA1E4741B066B9600723C7D /* TunaSwizzler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TunaSwizzler.m; sourceTree = "<group>"; };
 		5EC687DB1AAF475C004DC13C /* IDEFileBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEFileBreakpoint.h; sourceTree = "<group>"; };
 		5EC687DC1AAF47C9004DC13C /* IDEBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEBreakpoint.h; sourceTree = "<group>"; };
 		5EC687DD1AAF4812004DC13C /* IDELogBreakpointAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDELogBreakpointAction.h; sourceTree = "<group>"; };
@@ -48,6 +53,7 @@
 		5ECDEFC81AAF457300F8EC91 /* IDESourceCodeEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDESourceCodeEditor.h; sourceTree = "<group>"; };
 		5ECDEFC91AAF45F700F8EC91 /* IDEWorkspace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEWorkspace.h; sourceTree = "<group>"; };
 		5ECDEFCA1AAF46A600F8EC91 /* DVTTextDocumentLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DVTTextDocumentLocation.h; sourceTree = "<group>"; };
+		5EEA3F0F1B064DFB0073D335 /* DBGLLDBSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBGLLDBSession.h; sourceTree = "<group>"; };
 		5EF099551AB2002C00AE2462 /* IDEEditorHistoryStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEEditorHistoryStack.h; sourceTree = "<group>"; };
 		5EF099561AB2008F00AE2462 /* IDEEditorHistoryItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEEditorHistoryItem.h; sourceTree = "<group>"; };
 		5EF5F0891AAF5581001CC293 /* IDEEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEEditor.h; sourceTree = "<group>"; };
@@ -59,7 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E9C01A71AF4D2F6001AB771 /* DebuggerUI in Frameworks */,
+				5EA1E46C1B06681400723C7D /* DebuggerUI in Frameworks */,
 				5ECDEFB51AAF414B00F8EC91 /* AppKit.framework in Frameworks */,
 				5ECDEFB71AAF414B00F8EC91 /* Foundation.framework in Frameworks */,
 				5E78A0F61AAF5C5B008832A8 /* DVTFoundation.framework in Frameworks */,
@@ -147,8 +153,8 @@
 		5ECDEFB31AAF414B00F8EC91 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5E9C01A61AF4D2F6001AB771 /* DebuggerUI */,
-				5EBD1AF41AF784980089257D /* DebuggerUI.ideplugin */,
+				5EA1E46B1B06681400723C7D /* DebuggerUI */,
+				5EA1E4691B06680300723C7D /* DebuggerUI.ideplugin */,
 				5E78A0F51AAF5C5B008832A8 /* DVTFoundation.framework */,
 				5E78A0EF1AAF5C22008832A8 /* IDEFoundation.framework */,
 				5E78A0ED1AAF5C1B008832A8 /* IDEKit.framework */,
@@ -164,6 +170,8 @@
 				5ECDEFC51AAF42C800F8EC91 /* Xcode */,
 				5ECDEFBD1AAF414B00F8EC91 /* Tuna.h */,
 				5ECDEFBE1AAF414B00F8EC91 /* Tuna.m */,
+				5EA1E4731B066B9600723C7D /* TunaSwizzler.h */,
+				5EA1E4741B066B9600723C7D /* TunaSwizzler.m */,
 				5ECDEFB91AAF414B00F8EC91 /* Supporting Files */,
 			);
 			path = Tuna;
@@ -187,8 +195,19 @@
 				5E78A0F81AAF5CC6008832A8 /* IDEFoundation */,
 				5E78A0F91AAF5CD0008832A8 /* IDEKit */,
 				5E9C01A81AF4EC4B001AB771 /* DebuggerUI */,
+				5EEA3F0E1B064DDA0073D335 /* DebuggerLLDB */,
 			);
 			name = Xcode;
+			sourceTree = "<group>";
+		};
+		5EEA3F0E1B064DDA0073D335 /* DebuggerLLDB */ = {
+			isa = PBXGroup;
+			children = (
+				5EA1E45C1B06576900723C7D /* DBGLLDBLauncher.h */,
+				5EA1E45D1B06578D00723C7D /* DBGDebugSession.h */,
+				5EEA3F0F1B064DFB0073D335 /* DBGLLDBSession.h */,
+			);
+			name = DebuggerLLDB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,8 +266,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EA1E46A1B06680300723C7D /* DebuggerUI.ideplugin in Resources */,
 				5ECDEFBC1AAF414B00F8EC91 /* Tuna.xcscheme in Resources */,
-				5EBD1AF51AF784980089257D /* DebuggerUI.ideplugin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ECDEFBF1AAF414B00F8EC91 /* Tuna.m in Sources */,
+				5EA1E4751B066B9600723C7D /* TunaSwizzler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +371,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/PlugIns/DebuggerUI.ideplugin/Contents/MacOS",
+					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/PlugIns/DebuggerLLDB.ideplugin/Contents/MacOS",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -374,6 +395,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/PlugIns/DebuggerUI.ideplugin/Contents/MacOS",
+					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/PlugIns/DebuggerLLDB.ideplugin/Contents/MacOS",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";

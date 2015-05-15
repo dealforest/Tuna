@@ -35,3 +35,8 @@
 
 // DebuggerUI
 #import "IDEBreakpointEditorPopoverViewController.h"
+
+// DebuggerLLDB
+#import "DBGLLDBLauncher.h"
+#import "DBGDebugSession.h"
+#import "DBGLLDBSession.h"
