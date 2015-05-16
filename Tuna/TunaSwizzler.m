@@ -37,8 +37,8 @@
         Method swizzledMethod = class_getInstanceMethod(destinationClass, destinationSelector);
         
         method_exchangeImplementations(originalMethod, swizzledMethod);
-        
-    } @catch (NSException *exception) {
+    }
+    @catch (NSException *exception) {
         NSLog(@"TunaSwizzler: Failed to swizzle %@. %@", NSStringFromSelector(sourceSelector), exception);
     }
 }
@@ -54,8 +54,9 @@
         __weak DBGLLDBSession *wself = (DBGLLDBSession *)self;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             if ([[wself process] isPaused]) {
-                [[wself launcher] _executeLLDBCommands:@"p @import Foundation\n"];
                 [[wself launcher] _executeLLDBCommands:@"p @import UIKit\n"];
+                [[wself launcher] _executeLLDBCommands:@"p @import Foundation\n"];
+                [[wself launcher] _executeLLDBCommands:@"po @\"import framework UIKit and Foundation\"\n"];
             }
         });
     }
