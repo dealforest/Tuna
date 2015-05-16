@@ -69,7 +69,6 @@ typedef NS_ENUM(NSInteger, EditorType)
 
 - (void)createMenuItem
 {
-    
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSString *pluginName = [bundle objectForInfoDictionaryKey:(NSString *)kCFBundleNameKey];
     NSString *pluginVersion = [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
@@ -262,9 +261,9 @@ typedef NS_ENUM(NSInteger, EditorType)
     long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor];
     IDEWorkspace *workspace = [self currentWorkspace];
     DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
-    if ([workspace.breakpointManager fileBreakpointAtDocumentLocation:documentLocation]) {
-        NSBeep();
-        return;
+    IDEFileBreakpoint *breakpoint = [workspace.breakpointManager createFileBreakpointAtDocumentLocation:documentLocation];
+    if (breakpoint) {
+        [workspace.breakpointManager.mutableBreakpoints removeObject:breakpoint];
     }
     
     Ivar ivar = class_getInstanceVariable(object_getClass(currentSourceCodeEditor), "_sidebarView");
@@ -292,9 +291,9 @@ typedef NS_ENUM(NSInteger, EditorType)
     long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor];
     IDEWorkspace *workspace = [self currentWorkspace];
     DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
-    if ([workspace.breakpointManager fileBreakpointAtDocumentLocation:documentLocation]) {
-        NSBeep();
-        return;
+    IDEFileBreakpoint *breakpoint = [workspace.breakpointManager createFileBreakpointAtDocumentLocation:documentLocation];
+    if (breakpoint) {
+        [workspace.breakpointManager.mutableBreakpoints removeObject:breakpoint];
     }
     
     Ivar ivar = class_getInstanceVariable(object_getClass(currentSourceCodeEditor), "_sidebarView");
