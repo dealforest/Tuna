@@ -4,6 +4,9 @@
 
 Xcode plugin that provides easy set breakpoint with action.
 
+## Feature
+* fast setting breakpoit with action
+* auto import `Foundation` and `UIKit` in LLDB
 
 ## Usage
 
@@ -20,6 +23,18 @@ Xcode plugin that provides easy set breakpoint with action.
 in the case of select `cell.textLabel.text`
 
 ![Capture](https://raw.githubusercontent.com/dealforest/Tuna/master/images/capture_print.png)
+
+### Set Breakpoint with Input Message
+1. You press the shortcut key(`Ctrl + Shift + '`) or the menu(`Debug -> Tuna -> Toggle Breakpoint`)
+
+### Set Breakpoint with Input Command
+1. You press the shortcut key(`Ctrl + Shift + "`) or the menu(`Debug -> Tuna -> Toggle Breakpoint`)
+
+### Toggle Breakpoint
+1. You press the shortcut key(`Ctrl + Shift + [`) or the menu(`Debug -> Tuna -> Toggle Breakpoint`)
+
+### Clear All File Breakpoint
+1. You press the shortcut key(`Ctrl + Shift + ]`) or the menu(`Debug -> Tuna -> Clear All File Breakpoint`)
 
 ## Installation
 Download the project and build it, and then relaunch Xcode.
