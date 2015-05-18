@@ -17,6 +17,7 @@
 		5ECDEFB71AAF414B00F8EC91 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECDEFB61AAF414B00F8EC91 /* Foundation.framework */; };
 		5ECDEFBC1AAF414B00F8EC91 /* Tuna.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5ECDEFBB1AAF414B00F8EC91 /* Tuna.xcscheme */; };
 		5ECDEFBF1AAF414B00F8EC91 /* Tuna.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECDEFBE1AAF414B00F8EC91 /* Tuna.m */; };
+		B1F3407A1B088CAB00208BB0 /* TunaImportFrameworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F340791B088CAB00208BB0 /* TunaImportFrameworkManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,8 @@
 		5EF099561AB2008F00AE2462 /* IDEEditorHistoryItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEEditorHistoryItem.h; sourceTree = "<group>"; };
 		5EF5F0891AAF5581001CC293 /* IDEEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEEditor.h; sourceTree = "<group>"; };
 		B17EF2B01ACEB711000CF74F /* IDEComparisonEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEComparisonEditor.h; sourceTree = "<group>"; };
+		B1F340781B088CAB00208BB0 /* TunaImportFrameworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TunaImportFrameworkManager.h; sourceTree = "<group>"; };
+		B1F340791B088CAB00208BB0 /* TunaImportFrameworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TunaImportFrameworkManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +175,8 @@
 				5ECDEFBE1AAF414B00F8EC91 /* Tuna.m */,
 				5EA1E4731B066B9600723C7D /* TunaSwizzler.h */,
 				5EA1E4741B066B9600723C7D /* TunaSwizzler.m */,
+				B1F340781B088CAB00208BB0 /* TunaImportFrameworkManager.h */,
+				B1F340791B088CAB00208BB0 /* TunaImportFrameworkManager.m */,
 				5ECDEFB91AAF414B00F8EC91 /* Supporting Files */,
 			);
 			path = Tuna;
@@ -279,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ECDEFBF1AAF414B00F8EC91 /* Tuna.m in Sources */,
+				B1F3407A1B088CAB00208BB0 /* TunaImportFrameworkManager.m in Sources */,
 				5EA1E4751B066B9600723C7D /* TunaSwizzler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
