@@ -155,7 +155,7 @@
     {
         if (self.importFrameworks.count > 0)
         {
-            NSString* command = [[NSString alloc] initWithFormat:@"po \"import framework %@\"\n", self.description];
+            NSString* command = [[NSString alloc] initWithFormat:@"po @\"import framework %@\"\n", self.description];
             [[session launcher] _executeLLDBCommands:command];
         }
     }
