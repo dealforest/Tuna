@@ -7,9 +7,10 @@
 //
 
 #import "TunaSwizzler.h"
-#import "DBGLLDBSession.h"
-#import "DBGLLDBLauncher.h"
+#import "TunaImportFrameworkManager.h"
 #import <objc/runtime.h>
+
+static TunaImportFrameworkManager* importFrameworkManager;
 
 @implementation TunaSwizzler
 
@@ -17,6 +18,7 @@
 {
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
+	  importFrameworkManager = [[TunaImportFrameworkManager alloc] init];
     [self swizzle:@selector(DBGLLDBSession$setPauseRequested:)];
   });
 }
@@ -54,9 +56,8 @@
         __weak DBGLLDBSession *wself = (DBGLLDBSession *)self;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             if ([[wself process] isPaused]) {
-                [[wself launcher] _executeLLDBCommands:@"p @import UIKit\n"];
-                [[wself launcher] _executeLLDBCommands:@"p @import Foundation\n"];
-                [[wself launcher] _executeLLDBCommands:@"po @\"import framework UIKit and Foundation\"\n"];
+                [importFrameworkManager doImportWithSession:wself];
+                [importFrameworkManager printDescriptionWithSession:wself];
             }
         });
     }
