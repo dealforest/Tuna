@@ -76,16 +76,7 @@ typedef NS_ENUM(NSInteger, EditorType)
 #pragma mark - Observer
 
 - (void) menuDidChange: (NSNotification *) notification {
-    [[NSNotificationCenter defaultCenter] removeObserver: self
-                                                    name: NSMenuDidChangeItemNotification
-                                                  object: nil];
-    
     [self createMenuItem];
-    
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(menuDidChange:)
-                                                 name: NSMenuDidChangeItemNotification
-                                               object: nil];
 }
 
 
@@ -93,6 +84,10 @@ typedef NS_ENUM(NSInteger, EditorType)
 
 - (void)createMenuItem
 {
+    if ([self isInstalledMenu]) {
+        return;
+    }
+    
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSString *pluginName = [bundle objectForInfoDictionaryKey:(NSString *)kCFBundleNameKey];
     NSString *pluginVersion = [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
@@ -173,12 +168,20 @@ typedef NS_ENUM(NSInteger, EditorType)
 - (void)installMenuItem:(NSMenuItem *)menuItem
 {
     NSMenuItem *debugMenuItem = [[NSApp mainMenu] itemWithTitle:@"Debug"];
-    NSMenu *debugSubmenu = debugMenuItem.submenu;
-    if (debugMenuItem && ![debugMenuItem.submenu itemWithTitle:@"Tuna"]) {
+    if (debugMenuItem) {
+        NSMenu *debugSubmenu = debugMenuItem.submenu;
         NSMenuItem *debugBreakpointsMenuItem = [debugSubmenu itemWithTitle:@"Breakpoints"];
         NSUInteger indexForInsertMenu = [debugSubmenu.itemArray indexOfObject:debugBreakpointsMenuItem] + 1;
         [debugSubmenu insertItem:menuItem atIndex:indexForInsertMenu];
     }
+}
+
+- (BOOL)isInstalledMenu
+{
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSString *pluginName = [bundle objectForInfoDictionaryKey:(NSString *)kCFBundleNameKey];
+    NSMenuItem *debugMenuItem = [[NSApp mainMenu] itemWithTitle:@"Debug"];
+    return debugMenuItem && ![debugMenuItem.submenu itemWithTitle:pluginName];
 }
 
 #pragma mark - menu selector
