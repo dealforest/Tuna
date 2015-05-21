@@ -65,9 +65,29 @@ typedef NS_ENUM(NSInteger, EditorType)
     self = [super init];
     if (self) {
         [self createMenuItem];
+        [[NSNotificationCenter defaultCenter] addObserver: self
+                                                 selector: @selector(menuDidChange:)
+                                                     name: NSMenuDidChangeItemNotification
+                                                   object: nil];
     }
     return self;
 }
+
+#pragma mark - Observer
+
+- (void) menuDidChange: (NSNotification *) notification {
+    [[NSNotificationCenter defaultCenter] removeObserver: self
+                                                    name: NSMenuDidChangeItemNotification
+                                                  object: nil];
+    
+    [self createMenuItem];
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(menuDidChange:)
+                                                 name: NSMenuDidChangeItemNotification
+                                               object: nil];
+}
+
 
 #pragma mark - menu
 
@@ -154,10 +174,11 @@ typedef NS_ENUM(NSInteger, EditorType)
 {
     NSMenuItem *debugMenuItem = [[NSApp mainMenu] itemWithTitle:@"Debug"];
     NSMenu *debugSubmenu = debugMenuItem.submenu;
-    NSMenuItem *debugBreakpointsMenuItem = [debugSubmenu itemWithTitle:@"Breakpoints"];
-    NSUInteger indexForInsertMenu = [debugSubmenu.itemArray indexOfObject:debugBreakpointsMenuItem] + 1;
-    
-    [debugSubmenu insertItem:menuItem atIndex:indexForInsertMenu];
+    if (debugMenuItem && ![debugMenuItem.submenu itemWithTitle:@"Tuna"]) {
+        NSMenuItem *debugBreakpointsMenuItem = [debugSubmenu itemWithTitle:@"Breakpoints"];
+        NSUInteger indexForInsertMenu = [debugSubmenu.itemArray indexOfObject:debugBreakpointsMenuItem] + 1;
+        [debugSubmenu insertItem:menuItem atIndex:indexForInsertMenu];
+    }
 }
 
 #pragma mark - menu selector
