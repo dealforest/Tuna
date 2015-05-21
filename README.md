@@ -6,7 +6,7 @@ Xcode plugin that provides easy set breakpoint with action.
 
 ## Feature
 * fast setting breakpoit with action
-* auto import `Foundation` and `UIKit` in LLDB
+* auto import `Foundation` and `UIKit` in LLDB (TODO)
 
 ## Usage
 

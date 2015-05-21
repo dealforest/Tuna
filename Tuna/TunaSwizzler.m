@@ -17,7 +17,7 @@
 {
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    [self swizzle:@selector(DBGLLDBSession$setPauseRequested:)];
+//    [self swizzle:@selector(DBGLLDBSession$setPauseRequested:)];
   });
 }
 
