@@ -46,9 +46,13 @@ typedef NS_ENUM(NSInteger, EditorType)
 + (void)pluginDidLoad:(NSBundle *)bundle
 {
     static dispatch_once_t _onceToken;
-    dispatch_once(&_onceToken, ^{
-        _sharedInstance = [self new];
-    });
+    
+    NSString *currentApplicationName = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *) kCFBundleNameKey];
+    if ([currentApplicationName isEqual:@"Xcode"]) {
+        dispatch_once(&_onceToken, ^{
+            _sharedInstance = [self new];
+        });
+    }
 }
 
 + (instancetype)sharedInstance
