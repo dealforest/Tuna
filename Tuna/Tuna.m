@@ -181,7 +181,7 @@ typedef NS_ENUM(NSInteger, EditorType)
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSString *pluginName = [bundle objectForInfoDictionaryKey:(NSString *)kCFBundleNameKey];
     NSMenuItem *debugMenuItem = [[NSApp mainMenu] itemWithTitle:@"Debug"];
-    return debugMenuItem && ![debugMenuItem.submenu itemWithTitle:pluginName];
+    return debugMenuItem && [debugMenuItem.submenu itemWithTitle:pluginName];
 }
 
 #pragma mark - menu selector
