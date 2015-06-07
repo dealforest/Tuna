@@ -8,39 +8,11 @@
 
 #import "Tuna.h"
 #import "Xcode.h"
+#import "TunaIDEHelper.h"
 #import "TunaLLDBInjector.h"
 #import <objc/runtime.h>
 
 static id _sharedInstance = nil;
-
-/// SourceCodeEditor Type.
-typedef NS_ENUM(NSInteger, EditorType)
-{
-    EditorTypeOther,
-    EditorTypeSourceCodeEditor,
-    EditorTypeSourceCodeComparisonEditor
-};
-
-@interface Tuna()
-
-@property (nonatomic, strong, readwrite) NSBundle *bundle;
-
-/// Install Tuna menu item in Xcode.
-- (void)installMenuItem:(NSMenuItem *)menu;
-
-/// Get type of the editor.
-- (EditorType)editorTypeOf:(IDEEditor *)editor;
-
-/// Returns whether a SourceCodeComparisonEditor's primary editor is key editor.
-- (BOOL)isKeyEditorEqualToPrimaryEditor:(IDESourceCodeComparisonEditor *)sourceCodeComparisonEditor;
-
-/// Get key SourceCodeEditor from a SourceCodeComparisonEditor.
-- (IDESourceCodeEditor *)getKeySourceCodeEditor:(IDESourceCodeComparisonEditor *)sourceCodeComparisonEditor;
-
-/// Get key SourceCodeEditor from a SourceCodeComparisonEditor. If the SourceCodeComparisonEditor's primary editor is not key editor, return nil.
-- (IDESourceCodeEditor *)getKeySourceCodeEditorOnlyIfKeyEditorIsEqualToPrimaryEditor:(IDESourceCodeComparisonEditor *)sourceCodeComparisonEditor;
-
-@end
 
 @implementation Tuna
 
@@ -189,16 +161,16 @@ typedef NS_ENUM(NSInteger, EditorType)
 
 - (void)toggleEnableFileBreakpoint
 {
-    IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
+    IDESourceCodeEditor *currentSourceCodeEditor = [TunaIDEHelper currentSourceCodeEditor];
     
     if (!currentSourceCodeEditor) {
         NSBeep();
         return;
     }
     
-    long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor];
+    long long lineNumber = [TunaIDEHelper currentLineNumberWithEditor:currentSourceCodeEditor];
     DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
-    IDEFileBreakpoint *breakpoint = [[self currentWorkspace].breakpointManager fileBreakpointAtDocumentLocation:documentLocation];
+    IDEFileBreakpoint *breakpoint = [[TunaIDEHelper currentWorkspace].breakpointManager fileBreakpointAtDocumentLocation:documentLocation];
     if (breakpoint) {
         [breakpoint toggleShouldBeEnabled];
     }
@@ -206,7 +178,7 @@ typedef NS_ENUM(NSInteger, EditorType)
 
 - (void)clearAllFileBreakpoint
 {
-    IDEWorkspace *workspace = [self currentWorkspace];
+    IDEWorkspace *workspace = [TunaIDEHelper currentWorkspace];
     NSMutableIndexSet *target = [NSMutableIndexSet indexSet];
     NSUInteger index = 0;
     for (IDEBreakpoint *breakpoint in workspace.breakpointManager.breakpoints) {
@@ -220,7 +192,7 @@ typedef NS_ENUM(NSInteger, EditorType)
 
 - (void)setPrintBreakpoint
 {
-    NSTextView *textView = [self currentSourceCodeTextView];
+    NSTextView *textView = [TunaIDEHelper currentSourceCodeTextView];
     NSString *selectedText = [[textView.string substringWithRange:textView.selectedRange]
                               stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if (selectedText.length == 0) {
@@ -228,14 +200,14 @@ typedef NS_ENUM(NSInteger, EditorType)
         return;
     }
     
-    IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
+    IDESourceCodeEditor *currentSourceCodeEditor = [TunaIDEHelper currentSourceCodeEditor];
     
     if (!currentSourceCodeEditor) {
         NSBeep();
         return;
     }
 
-    long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor] + 1;
+    long long lineNumber = [TunaIDEHelper currentLineNumberWithEditor:currentSourceCodeEditor] + 1;
     DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
     IDEFileBreakpoint *breakpoint = [self fileBreakpointAtDocumentLocation:documentLocation];
     [breakpoint.mutableActions addObject:({
@@ -257,14 +229,14 @@ typedef NS_ENUM(NSInteger, EditorType)
 
 - (void)setBacktraceBreakpoint
 {
-    IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
+    IDESourceCodeEditor *currentSourceCodeEditor = [TunaIDEHelper currentSourceCodeEditor];
     
     if (!currentSourceCodeEditor) {
         NSBeep();
         return;
     }
 
-    long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor];
+    long long lineNumber = [TunaIDEHelper currentLineNumberWithEditor:currentSourceCodeEditor];
     DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
     IDEFileBreakpoint *breakpoint = [self fileBreakpointAtDocumentLocation:documentLocation];
     [breakpoint.mutableActions addObject:({
@@ -281,14 +253,14 @@ typedef NS_ENUM(NSInteger, EditorType)
 
 - (void)setBreakpointWithInputMessage
 {
-    IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
+    IDESourceCodeEditor *currentSourceCodeEditor = [TunaIDEHelper currentSourceCodeEditor];
     if (!currentSourceCodeEditor) {
         NSBeep();
         return;
     }
 
-    long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor];
-    IDEWorkspace *workspace = [self currentWorkspace];
+    long long lineNumber = [TunaIDEHelper currentLineNumberWithEditor:currentSourceCodeEditor];
+    IDEWorkspace *workspace = [TunaIDEHelper currentWorkspace];
     DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
     IDEFileBreakpoint *breakpoint = [workspace.breakpointManager createFileBreakpointAtDocumentLocation:documentLocation];
     if (breakpoint) {
@@ -311,14 +283,14 @@ typedef NS_ENUM(NSInteger, EditorType)
 
 - (void)setBreakpointWithInputCommand
 {
-    IDESourceCodeEditor *currentSourceCodeEditor = [self currentSourceCodeEditor];
+    IDESourceCodeEditor *currentSourceCodeEditor = [TunaIDEHelper currentSourceCodeEditor];
     if (!currentSourceCodeEditor) {
         NSBeep();
         return;
     }
 
-    long long lineNumber = [self currentLineNumberWithEditor:currentSourceCodeEditor];
-    IDEWorkspace *workspace = [self currentWorkspace];
+    long long lineNumber = [TunaIDEHelper currentLineNumberWithEditor:currentSourceCodeEditor];
+    IDEWorkspace *workspace = [TunaIDEHelper currentWorkspace];
     DVTTextDocumentLocation *documentLocation = [self documentLocationWithLineNumber:lineNumber];
     IDEFileBreakpoint *breakpoint = [workspace.breakpointManager createFileBreakpointAtDocumentLocation:documentLocation];
     if (breakpoint) {
@@ -343,7 +315,7 @@ typedef NS_ENUM(NSInteger, EditorType)
 
 - (IDEFileBreakpoint *)fileBreakpointAtDocumentLocation:(DVTTextDocumentLocation *)documentLocation
 {
-    IDEWorkspace *workspace = [self currentWorkspace];
+    IDEWorkspace *workspace = [TunaIDEHelper currentWorkspace];
     IDEFileBreakpoint *breakpoint = [workspace.breakpointManager fileBreakpointAtDocumentLocation:documentLocation] ?:
         [workspace.breakpointManager createFileBreakpointAtDocumentLocation:documentLocation];
     breakpoint.continueAfterRunningActions = YES;
@@ -352,143 +324,12 @@ typedef NS_ENUM(NSInteger, EditorType)
 
 - (DVTTextDocumentLocation *)documentLocationWithLineNumber:(long long)lineNumber
 {
-    IDEEditorContext *editorContext = [self currentEditorContext];
+    IDEEditorContext *editorContext = [TunaIDEHelper currentEditorContext];
     IDEEditorHistoryStack *stack = [editorContext currentHistoryStack];
     NSNumber *timestamp = @([[NSDate date] timeIntervalSince1970]);
     return [[DVTTextDocumentLocation alloc] initWithDocumentURL:stack.currentEditorHistoryItem.documentURL
                                                       timestamp:timestamp
                                                       lineRange:NSMakeRange(MAX(lineNumber, 0), lineNumber)];
-}
-
-#pragma mark - IDE helper
-
-- (IDEWorkspace *)currentWorkspace
-{
-    NSWindowController *currentWindowController = [[NSApp keyWindow] windowController];
-    if ([currentWindowController isKindOfClass:NSClassFromString(@"IDEWorkspaceWindowController")]) {
-        return [currentWindowController valueForKey:@"_workspace"];
-    }
-    else {
-        return nil;
-    }
-}
-
-- (IDEWorkspaceDocument *)currentWorkspaceDocument
-{
-    NSWindowController *currentWindowController = [[NSApp keyWindow] windowController];
-    id document = [currentWindowController document];
-    if (currentWindowController && [document isKindOfClass:NSClassFromString(@"IDEWorkspaceDocument")]) {
-        return (IDEWorkspaceDocument *)document;
-    }
-    else {
-        return nil;
-    }
-}
-
-- (IDEEditorContext *)currentEditorContext
-{
-    NSWindowController *currentWindowController = [[NSApp keyWindow] windowController];
-    if ([currentWindowController isKindOfClass:NSClassFromString(@"IDEWorkspaceWindowController")]) {
-        IDEEditorArea *editorArea = [(IDEWorkspaceWindowController *)currentWindowController editorArea];
-        return [editorArea lastActiveEditorContext];
-    }
-    else {
-        return nil;
-    }
-}
-
-- (IDEEditor *)currentEditor
-{
-    IDEEditorContext *editorContext = [self currentEditorContext];
-    if (editorContext) {
-        return [editorContext editor];
-    }
-    else {
-        return nil;
-    }
-}
-
-- (EditorType)editorTypeOf:(IDEEditor *)editor
-{
-    NSDictionary *editors = @{
-                             @"IDESourceCodeEditor" : @(EditorTypeSourceCodeEditor),
-                             @"IDESourceCodeComparisonEditor" : @(EditorTypeSourceCodeComparisonEditor)
-                             };
-    
-    for (NSString *className in editors.allKeys) {
-        if ([editor isKindOfClass:NSClassFromString(className)]) {
-            return (EditorType)[editors[className] integerValue];
-        }
-    }
-    
-    return EditorTypeOther;
-}
-
-- (IDESourceCodeEditor *)currentSourceCodeEditor
-{
-    IDEEditor *editor = [self currentEditor];
-    
-    switch ([self editorTypeOf:editor]) {
-        case EditorTypeSourceCodeEditor:
-            return (IDESourceCodeEditor *)editor;
-
-        case EditorTypeSourceCodeComparisonEditor:
-            return [self getKeySourceCodeEditorOnlyIfKeyEditorIsEqualToPrimaryEditor:(IDESourceCodeComparisonEditor*)editor];
-            
-        case EditorTypeOther:
-            return nil;
-    }
-}
-
-- (BOOL)isKeyEditorEqualToPrimaryEditor:(IDESourceCodeComparisonEditor *)sourceCodeComparisonEditor
-{
-    return sourceCodeComparisonEditor.keyEditor == sourceCodeComparisonEditor.primaryEditorInstance;
-}
-
-- (IDESourceCodeEditor *)getKeySourceCodeEditorOnlyIfKeyEditorIsEqualToPrimaryEditor:(IDESourceCodeComparisonEditor *)sourceCodeComparisonEditor
-{
-    if ([self isKeyEditorEqualToPrimaryEditor:sourceCodeComparisonEditor]) {
-        return [self getKeySourceCodeEditor:sourceCodeComparisonEditor];
-    }
-    else {
-        return nil;
-    }
-}
-
-- (IDESourceCodeEditor *)getKeySourceCodeEditor:(IDESourceCodeComparisonEditor *)sourceCodeComparisonEditor
-{
-    IDEEditor *editor = sourceCodeComparisonEditor.keyEditor;
-    
-    switch ([self editorTypeOf:editor]) {
-        case EditorTypeSourceCodeEditor:
-            return (IDESourceCodeEditor*)editor;
-            
-        case EditorTypeSourceCodeComparisonEditor:
-        case EditorTypeOther:
-            return nil;
-    }
-}
-
-
-- (NSTextView *)currentSourceCodeTextView
-{
-    IDEEditor *editor = [self currentEditor];
-    
-    switch ([self editorTypeOf:editor]) {
-        case EditorTypeSourceCodeEditor:
-            return (NSTextView *)editor.textView;
-            
-        case EditorTypeSourceCodeComparisonEditor:
-            return (NSTextView *)((IDESourceCodeComparisonEditor *)editor).keyTextView;
-            
-        case EditorTypeOther:
-            return nil;
-    }
-}
-
-- (long long)currentLineNumberWithEditor:(IDESourceCodeEditor *)editor
-{
-    return [editor respondsToSelector:@selector(_currentOneBasedLineNumber)] ? editor._currentOneBasedLineNumber : editor._currentOneBasedLineNubmer;
 }
 
 @end
