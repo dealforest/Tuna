@@ -7,9 +7,12 @@
 //
 
 #import "TunaLLDBInjector.h"
+#import "TunaIDEHelper.h"
 
 #import "DBGLLDBSession.h"
 #import "DBGLLDBLauncher.h"
+
+static NSString * const TunaLLDBFileName = @".lldbinit-Tuna";
 
 @interface TunaLLDBInjector()
 
@@ -51,12 +54,37 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         if ([[session process] isPaused]) {
-//            [[session launcher] _executeLLDBCommands:@"p @import UIKit\n"];
-//            [[session launcher] _executeLLDBCommands:@"p @import Foundation\n"];
-//            [[session launcher] _executeLLDBCommands:@"po @\"import framework UIKit and Foundation\"\n"];
+            // {PROJECT_ROOT}/.lldbinit-Tuna
+            IDEWorkspace *workspace = [TunaIDEHelper currentWorkspace];
+            DVTFilePath *representingFilePath = workspace.representingFilePath;
+            NSString *projectRootPath = [representingFilePath.pathString stringByDeletingLastPathComponent];
+            [wself loadLLDBFileWithPath:[projectRootPath stringByAppendingPathComponent:TunaLLDBFileName]
+                               session:session];
+
+            // {HOME}/.lldbinit-Tuna
+            NSString *homeRootPath = [NSProcessInfo processInfo].environment[@"HOME"];
+            [wself loadLLDBFileWithPath:[homeRootPath stringByAppendingPathComponent:TunaLLDBFileName]
+                               session:session];
+            
             wself.lastSession = session;
         }
     });
+}
+
+- (void)loadLLDBFileWithPath:(NSString *)path session:(DBGLLDBSession *)session
+{
+    NSString *text = [NSString stringWithContentsOfFile:path
+                                               encoding:NSUTF8StringEncoding
+                                                  error:nil];
+    if (text) {
+        NSArray *lines = [text componentsSeparatedByString:@"\n"];
+        for (NSString *command in lines) {
+            if ([command isEqualToString:@""]) {
+                continue;
+            }
+            [[session launcher] _executeLLDBCommands:command];
+        }
+    }
 }
 
 @end
