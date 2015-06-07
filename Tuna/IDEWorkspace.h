@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class IDEBreakpointManager;
+@class IDEBreakpointManager, DVTFilePath;
 
 @interface IDEWorkspace : NSObject
 
 @property(retain) IDEBreakpointManager *breakpointManager;
+@property(readonly) DVTFilePath *representingFilePath;
 
 @end

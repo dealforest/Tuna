@@ -8,6 +8,7 @@
 
 // DVFoundation
 #import "DVTTextDocumentLocation.h"
+#import "DVTFilePath.h"
 
 // DVTKit
 #import "DVTTextSidebarView.h"

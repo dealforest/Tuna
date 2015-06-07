@@ -21,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E1525CF1B15E77300817E70 /* DVTFilePath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DVTFilePath.h; sourceTree = "<group>"; };
 		5E1FB4121AF6847500276547 /* DVTTextSidebarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DVTTextSidebarView.h; sourceTree = "<group>"; };
 		5E2501891B249D5A00E6E02C /* TunaLLDBInjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TunaLLDBInjector.h; sourceTree = "<group>"; };
 		5E25018A1B249D5A00E6E02C /* TunaLLDBInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TunaLLDBInjector.m; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				5ECDEFCA1AAF46A600F8EC91 /* DVTTextDocumentLocation.h */,
+				5E1525CF1B15E77300817E70 /* DVTFilePath.h */,
 			);
 			name = DVFoundation;
 			sourceTree = "<group>";
