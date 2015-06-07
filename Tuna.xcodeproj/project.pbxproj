@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E25018B1B249D5A00E6E02C /* TunaLLDBInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E25018A1B249D5A00E6E02C /* TunaLLDBInjector.m */; };
 		5E78A0EE1AAF5C1B008832A8 /* IDEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0ED1AAF5C1B008832A8 /* IDEKit.framework */; };
 		5E78A0F01AAF5C22008832A8 /* IDEFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0EF1AAF5C22008832A8 /* IDEFoundation.framework */; };
 		5E78A0F61AAF5C5B008832A8 /* DVTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E78A0F51AAF5C5B008832A8 /* DVTFoundation.framework */; };
@@ -21,6 +22,8 @@
 
 /* Begin PBXFileReference section */
 		5E1FB4121AF6847500276547 /* DVTTextSidebarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DVTTextSidebarView.h; sourceTree = "<group>"; };
+		5E2501891B249D5A00E6E02C /* TunaLLDBInjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TunaLLDBInjector.h; sourceTree = "<group>"; };
+		5E25018A1B249D5A00E6E02C /* TunaLLDBInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TunaLLDBInjector.m; sourceTree = "<group>"; };
 		5E692F771AAF4A8B006780D4 /* IDEWorkspaceDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEWorkspaceDocument.h; sourceTree = "<group>"; };
 		5E692F781AAF4AED006780D4 /* IDEWorkspaceWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEWorkspaceWindowController.h; sourceTree = "<group>"; };
 		5E692F791AAF4B3C006780D4 /* IDEEditorContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDEEditorContext.h; sourceTree = "<group>"; };
@@ -170,6 +173,8 @@
 				5ECDEFC51AAF42C800F8EC91 /* Xcode */,
 				5ECDEFBD1AAF414B00F8EC91 /* Tuna.h */,
 				5ECDEFBE1AAF414B00F8EC91 /* Tuna.m */,
+				5E2501891B249D5A00E6E02C /* TunaLLDBInjector.h */,
+				5E25018A1B249D5A00E6E02C /* TunaLLDBInjector.m */,
 				5EA1E4731B066B9600723C7D /* TunaSwizzler.h */,
 				5EA1E4741B066B9600723C7D /* TunaSwizzler.m */,
 				5ECDEFB91AAF414B00F8EC91 /* Supporting Files */,
@@ -278,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E25018B1B249D5A00E6E02C /* TunaLLDBInjector.m in Sources */,
 				5ECDEFBF1AAF414B00F8EC91 /* Tuna.m in Sources */,
 				5EA1E4751B066B9600723C7D /* TunaSwizzler.m in Sources */,
 			);

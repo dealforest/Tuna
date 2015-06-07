@@ -8,6 +8,7 @@
 
 #import "Tuna.h"
 #import "Xcode.h"
+#import "TunaLLDBInjector.h"
 #import <objc/runtime.h>
 
 static id _sharedInstance = nil;
@@ -69,6 +70,7 @@ typedef NS_ENUM(NSInteger, EditorType)
                                                  selector: @selector(menuDidChange:)
                                                      name: NSMenuDidChangeItemNotification
                                                    object: nil];
+        [[TunaLLDBInjector sharedInstance] start];
     }
     return self;
 }
@@ -78,7 +80,6 @@ typedef NS_ENUM(NSInteger, EditorType)
 - (void) menuDidChange: (NSNotification *) notification {
     [self createMenuItem];
 }
-
 
 #pragma mark - menu
 

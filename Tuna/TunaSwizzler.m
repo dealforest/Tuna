@@ -7,8 +7,7 @@
 //
 
 #import "TunaSwizzler.h"
-#import "DBGLLDBSession.h"
-#import "DBGLLDBLauncher.h"
+#import "TunaLLDBInjector.h"
 #import <objc/runtime.h>
 
 @implementation TunaSwizzler
@@ -17,11 +16,11 @@
 {
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-//    [self swizzle:@selector(DBGLLDBSession$setPauseRequested:)];
+      [self swizzleForIDEPluginWithSelector:@selector(DBGLLDBSession$setPauseRequested:)];
   });
 }
 
-+ (void)swizzle:(SEL)sourceSelector
++ (void)swizzleForIDEPluginWithSelector:(SEL)sourceSelector
 {
     @try {
         NSArray *components = [NSStringFromSelector(sourceSelector) componentsSeparatedByString:@"$"];
@@ -51,14 +50,7 @@
     [self DBGLLDBSession$setPauseRequested:pauseRequested];
     
     if (!pauseRequested) {
-        __weak DBGLLDBSession *wself = (DBGLLDBSession *)self;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            if ([[wself process] isPaused]) {
-                [[wself launcher] _executeLLDBCommands:@"p @import UIKit\n"];
-                [[wself launcher] _executeLLDBCommands:@"p @import Foundation\n"];
-                [[wself launcher] _executeLLDBCommands:@"po @\"import framework UIKit and Foundation\"\n"];
-            }
-        });
+        [[TunaLLDBInjector sharedInstance] handleSessionPause:(DBGLLDBSession *)self];
     }
 }
 
