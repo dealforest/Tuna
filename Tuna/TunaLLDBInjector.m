@@ -43,10 +43,14 @@
 
 - (void)handleSessionPause:(DBGLLDBSession *)session
 {
+    if (!self.running || self.lastSession == session) {
+        return;
+    }
+    
     __weak typeof(self) wself = self;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        if ([[session process] isPaused] && wself.isRunning && wself.lastSession != session) {
+        if ([[session process] isPaused]) {
 //            [[session launcher] _executeLLDBCommands:@"p @import UIKit\n"];
 //            [[session launcher] _executeLLDBCommands:@"p @import Foundation\n"];
 //            [[session launcher] _executeLLDBCommands:@"po @\"import framework UIKit and Foundation\"\n"];
