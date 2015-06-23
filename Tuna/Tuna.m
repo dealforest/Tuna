@@ -247,11 +247,6 @@ typedef NS_ENUM(NSInteger, EditorType)
         action.consoleCommand = [@"po " stringByAppendingString:selectedText];
         action;
     })];
-    [breakpoint.mutableActions addObject:({
-        IDEDebuggerCommandBreakpointAction *action = [IDEDebuggerCommandBreakpointAction new];
-        action.consoleCommand = @"bt 0";
-        action;
-    })];
 }
 
 - (void)setBacktraceBreakpoint
